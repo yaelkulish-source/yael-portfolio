@@ -83,6 +83,10 @@
 
   /* ---------- HERO ---------- */
   .hero { padding: 92px 48px 64px; }
+  .brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; }
+  .nuvo-logo { height: 26px; width: auto; display: block; }
+  .brand-name { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: var(--ink); }
+  .eyebrow-sub { font-size: clamp(18px, 1.8vw, 21px); font-weight: 500; letter-spacing: -0.005em; color: var(--ink); margin-top: 22px; }
   .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: start; }
   .hero-text { text-align: left; }
   .hero .label { margin-bottom: 30px; }
@@ -96,8 +100,8 @@
     color: var(--ink-soft); margin-top: 26px; max-width: 44ch;
   }
   .hero-role {
-    font-size: 13.5px; font-weight: 600; letter-spacing: 0.01em;
-    color: var(--ink-faint); margin-top: 18px;
+    font-size: 12.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-faint); margin-top: 16px;
   }
 
   /* ---------- OPENING QUOTE ---------- */
@@ -181,9 +185,9 @@
 
   /* ---------- RESEARCH NUMBERS ---------- */
   .numbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 56px; }
-  .num-item { text-align: center; }
+  .num-item { text-align: left; }
   .num-n { font-weight: 700; font-size: clamp(56px, 8vw, 104px); line-height: 0.95; letter-spacing: -0.04em; color: var(--acc); }
-  .num-l { font-size: 15px; line-height: 1.45; color: var(--ink-soft); margin-top: 14px; max-width: 18ch; margin-left: auto; margin-right: auto; }
+  .num-l { font-size: 15px; line-height: 1.45; color: var(--ink-soft); margin-top: 14px; max-width: 18ch; }
 
   /* ---------- PERSONAS ---------- */
   .personas { display: flex; gap: 24px; justify-content: flex-start; flex-wrap: wrap; margin-top: 52px; }
@@ -327,6 +331,9 @@
   .night .phone::before { background: #3A2A2A; }
   .night .phone-screen, .night .mac-screen { background: #3A2A2A; }
   .night .mac-top { background: #3A2A2A; }
+  .day-payoff { margin-top: 56px; padding: 40px 44px; border-radius: 20px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+  .day-payoff p { font-size: clamp(19px, 2vw, 24px); font-weight: 400; line-height: 1.6; color: rgba(255,255,255,0.78); letter-spacing: -0.01em; max-width: 46ch; }
+  .day-payoff p strong { font-weight: 700; color: #FFFFFF; }
   .step-k { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--acc); margin-bottom: 16px; display: block; }
   .day-steps { display: flex; flex-direction: column; gap: 64px; margin-top: 56px; }
   .moment-time { display: block; font-size: clamp(44px, 6vw, 64px); font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
@@ -388,9 +395,9 @@
   <header class="hero wrap" data-screen-label="Hero">
     <div class="hero-grid">
       <div class="hero-text">
-        <span class="label">Medical UX · Nuvo Cares · 2023</span>
-        <h1 class="title">When the doctor isn't in the room</h1>
-        <p class="hero-sub">Designing for high-risk pregnancy monitoring.</p>
+        <div class="brand-row"><img class="nuvo-logo" src="assets/nuvo-logo.png" alt="Nuvo" /><span class="brand-name">Nuvo Cares</span></div>
+        <h1 class="title">Safe Pregnancy</h1>
+        <p class="eyebrow-sub">An app for high-risk pregnancy monitoring</p>
         <p class="hero-role">UX Design Lead · End-to-end</p>
       </div>
       <div class="short-embed">
@@ -410,7 +417,7 @@
   <!-- ===================== INTRO + META ===================== -->
   <section class="block" data-screen-label="Intro">
     <div class="wrap read">
-      <p class="intro-lead">At Nuvo Cares, I had daily access to high-risk patients. I initiated <span class="acc">Safe Pregnancy</span> to give them what the clinical system couldn't: someone always there, with full context of their medical history, ready to support them before they even had to ask.</p>
+      <p class="intro-lead">At Nuvo Cares, I had daily access to high-risk patients. I initiated the <span class="acc" style="white-space:nowrap;">Safe Pregnancy app</span> to give them what the clinical system couldn't: someone always there, with full context of their medical history, ready to support them before they even had to ask.</p>
     </div>
   </section>
 
@@ -478,7 +485,7 @@
     <div class="wrap">
       <div class="read">
       <span class="label">03: Research</span>
-      <h2 class="h2">Research</h2>
+      <h2 class="h2">Listening to both sides</h2>
       <p class="lead">I grounded the project in direct conversations: with the people living it, and the people treating them.</p>
       </div>
       <div class="numbers">
@@ -575,6 +582,10 @@
           </div>
         </div>
       </div>
+
+      <div class="day-payoff">
+        <p><strong>Lia never knew there was a concern.</strong><br>It was flagged, checked, and cleared before it reached her.<br><strong>Less anxiety for her. Faster response for her care team.</strong></p>
+      </div>
     </div>
   </section>
 
@@ -612,12 +623,12 @@
     <p class="sub">Safe Pregnancy reframed high-risk monitoring around the gaps between visits, where the anxiety actually lives.</p>
     <div class="nextcase">
       <div>
-        <div class="nx-k">Next</div>
-        <div class="nx-t">WE Bubbles</div>
+        <div class="nx-k">That's the full picture</div>
+        <div class="nx-t">Three projects. One way of thinking about problems.</div>
       </div>
       <div style="display:flex;align-items:center;gap:26px;">
-        <a class="nx-link" href="we-bubbles-case-study.html">
-          Next project
+        <a class="nx-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">
+          Let's talk
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
         <a style="font-size:13px;font-weight:600;color:var(--ink-faint);text-decoration:none;" href="index.html#work">All projects</a>
