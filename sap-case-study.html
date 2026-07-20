@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SAP Build: Developer Experience Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --serif: "Plus Jakarta Sans", system-ui, sans-serif;
+    --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+    --paper:    #FAFAF8;   /* warm white page */
+    --tint:     #EEF4FB;   /* light SAP blue section accent */
+    --visual:   #E4EDF8;   /* visual area */
+    --ink:      #1C1C18;   /* text primary */
+    --ink-soft: #6A6A60;   /* text secondary */
+    --ink-faint:#9A9A90;
+    --sap:      #0070C0;   /* SAP blue — labels & links only */
+    --sap-deep: #005a9c;
+    --line: rgba(28,28,24,0.08);
+    --line-2: rgba(28,28,24,0.14);
+
+    --maxw: 1120px;
+    --readw: 760px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 48px; }
+  .read { max-width: var(--readw); }
+  /* read used as a section container keeps the page's left margin;
+     line length is governed by child max-widths instead */
+  .wrap.read { max-width: var(--maxw); }
+
+  ::selection { background: #cfe2f5; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 74px; }
+  .nav-back {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 14px; font-weight: 600; color: var(--ink-soft);
+    text-decoration: none; transition: color 0.18s ease, gap 0.18s ease;
+  }
+  .nav-back:hover { color: var(--ink); gap: 13px; }
+  .nav-right { display: flex; gap: 4px; }
+  .nav-link {
+    font-size: 14px; font-weight: 600; color: var(--ink-soft);
+    text-decoration: none; padding: 9px 16px; border-radius: 999px;
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+  .nav-link:hover { color: var(--ink); background: var(--tint); }
+
+  /* ---------- LABELS ---------- */
+  .label {
+    font-family: var(--sans);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--sap);
+    display: inline-flex; align-items: center; gap: 11px;
+  }
+  .label::before { content: ""; width: 24px; height: 1px; background: color-mix(in srgb, var(--sap) 45%, transparent); }
+  .label.bare::before { display: none; }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 92px 48px 72px; }
+  .sap-logo { height: 24px; width: auto; display: block; margin-bottom: 26px; opacity: 0.92; }
+  .hero .label { margin-bottom: 34px; }
+  h1.title {
+    font-family: var(--sans); font-weight: 700;
+    font-size: clamp(38px, 5.4vw, 72px);
+    line-height: 1.06; letter-spacing: -0.028em;
+    color: var(--ink); max-width: 16ch; text-wrap: balance;
+  }
+  .hero-sub {
+    font-family: var(--sans); font-weight: 400;
+    font-size: clamp(18px, 1.9vw, 22px); line-height: 1.55;
+    color: var(--ink-soft); margin-top: 28px; max-width: 40ch;
+  }
+  .meta {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 36px; margin-top: 60px;
+    padding-top: 34px; border-top: 1px solid var(--line);
+  }
+  .meta-k {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px;
+  }
+  .meta-v { font-size: 15px; font-weight: 500; line-height: 1.6; color: var(--ink); }
+  .meta-v .sub { display: block; color: var(--ink-soft); font-weight: 400; font-size: 13.5px; margin-top: 5px; }
+
+  /* by the numbers */
+  .stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 36px; margin-top: 34px;
+    padding-top: 30px; border-top: 1px solid var(--line);
+  }
+  .stat-n { font-family: var(--serif); font-weight: 700; font-size: clamp(34px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+  .stat-l { font-size: 13.5px; line-height: 1.45; color: var(--ink-soft); margin-top: 12px; max-width: 22ch; }
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section.block { padding: 74px 0; }
+  section.tint { background: var(--tint); }
+  section.tint + section.tint { padding-top: 0; }
+  .block .label { margin-bottom: 22px; }
+  h2.h2 {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(28px, 3.6vw, 46px); line-height: 1.1;
+    letter-spacing: -0.012em; color: var(--ink);
+    text-wrap: balance; max-width: 19ch;
+  }
+  .lead {
+    font-size: clamp(17px, 1.8vw, 19px); font-weight: 400;
+    line-height: 1.74; color: var(--ink-soft);
+    margin-top: 24px; max-width: 62ch; text-wrap: pretty;
+  }
+  .lead strong { color: var(--ink); font-weight: 600; }
+
+  /* ---------- VIDEO ---------- */
+  figure.video { margin: 34px 0 0; max-width: 100%; }
+  .video-embed {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--line-2);
+    box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 40px 84px -48px rgba(28,40,90,0.34);
+    background: #000;
+  }
+  .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video-embed video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+  .video-cap {
+    font-size: 13px; font-style: italic; color: #6A6A60;
+    margin-top: 14px; line-height: 1.5; text-wrap: pretty;
+  }
+
+  /* ---------- COLLAPSE / READ MORE ---------- */
+  details.more { margin-top: 26px; max-width: 62ch; }
+  details.more > summary {
+    list-style: none; cursor: pointer; width: max-content;
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--sap); padding: 8px 0;
+    transition: gap 0.18s ease, color 0.18s ease;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary:hover { gap: 12px; color: var(--sap-deep); }
+  details.more > summary .chev { transition: transform 0.22s ease; display: inline-flex; }
+  details.more[open] > summary .chev { transform: rotate(180deg); }
+  details.more[open] > summary .more-txt::after { content: " less"; }
+  details.more:not([open]) > summary .more-txt::after { content: " more"; }
+  .more-body {
+    overflow: hidden;
+    border-left: 2px solid color-mix(in srgb, var(--sap) 28%, transparent);
+    padding: 4px 0 4px 22px; margin-top: 6px;
+  }
+  .more-body p {
+    font-size: 16px; line-height: 1.72; color: var(--ink-soft); text-wrap: pretty;
+  }
+  .more-body p + p { margin-top: 16px; }
+  details.more[open] .more-body { animation: reveal 0.42s ease; }
+  @keyframes reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+  /* ---------- PULL QUOTE ---------- */
+  .pqwrap { padding: 18px 0 6px; }
+  .pullquote {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(28px, 4vw, 50px); line-height: 1.2;
+    letter-spacing: -0.01em; color: var(--ink);
+    max-width: 22ch; text-wrap: balance;
+  }
+  .pullquote.lg { max-width: 26ch; }
+  .pq-cite {
+    font-family: var(--sans); font-style: normal; font-weight: 600;
+    font-size: 14px; letter-spacing: 0.01em; color: var(--ink-soft);
+    margin-top: 28px; display: flex; align-items: center; gap: 12px;
+  }
+  .pq-cite::before { content: ""; width: 28px; height: 1px; background: var(--line-2); }
+
+  /* statement-style short pull quote (S03/S04) */
+  .statement {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(26px, 3.6vw, 44px); line-height: 1.16;
+    letter-spacing: -0.012em; color: var(--ink);
+    max-width: 18ch; text-wrap: balance; margin-top: 30px;
+  }
+  .statement .em { color: var(--sap); font-style: italic; }
+
+  /* ---------- FIGURES ---------- */
+  section.figblock { padding: 28px 0; }
+  .figwide { max-width: 1120px; margin: 0 auto; }
+  figure.fig { margin: 0; }
+  .screen {
+    border-radius: 16px; overflow: hidden; background: #fff;
+    border: 1px solid var(--line-2);
+    box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 40px 84px -48px rgba(28,40,90,0.34);
+  }
+  .screen.hero-shot {
+    box-shadow: 0 2px 4px rgba(28,40,70,0.05), 0 44px 90px -42px rgba(0,112,192,0.42),
+                0 0 0 1px color-mix(in srgb, var(--sap) 22%, transparent);
+  }
+  .screen-bar {
+    height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 18px;
+    background: #f3f5f8; border-bottom: 1px solid rgba(28,28,24,0.07);
+  }
+  .screen-bar .dot { width: 11px; height: 11px; border-radius: 999px; flex: none; }
+  .screen-bar .dot.r { background: #ff5f57; }
+  .screen-bar .dot.y { background: #febc2e; }
+  .screen-bar .dot.g { background: #28c840; }
+  .screen-bar .addr {
+    flex: 1; max-width: 420px; margin: 0 auto; height: 26px; border-radius: 7px;
+    background: #fff; border: 1px solid rgba(28,28,24,0.10);
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    font-size: 12px; font-weight: 500; color: var(--ink-faint);
+  }
+  .screen-bar .addr svg { opacity: 0.5; }
+  .shot { display: block; width: 100%; height: auto; }
+  .shot.crop { display: block; width: 100%; height: auto; aspect-ratio: auto; object-fit: fill; }
+
+  .fig-cap {
+    margin-top: 22px; max-width: 760px;
+  }
+  .fig-title {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+    color: #6A6A60; margin-bottom: 14px; text-align: left;
+  }
+  .fig-lead {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: 20px; line-height: 1.4; color: var(--ink); text-wrap: balance;
+  }
+  .fig-cap-body p { font-size: 15px; line-height: 1.66; color: var(--ink-soft); margin-top: 10px; max-width: 66ch; }
+  .fig-note { font-size: 12.5px; color: var(--ink-faint); font-style: italic; margin-top: 10px; }
+
+  /* ---------- COMPARISON (S05) ---------- */
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 8px; }
+  .concept { display: flex; flex-direction: column; }
+  .concept-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px; gap: 12px;
+  }
+  .concept-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .concept-name .ab { font-family: ui-monospace, Menlo, monospace; color: var(--ink-faint); font-weight: 600; font-size: 13px; margin-right: 8px; }
+  .badge {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
+    padding: 5px 11px; border-radius: 999px; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .badge.no { color: #a23b3b; background: #f7e9e7; }
+  .badge.yes { color: var(--sap-deep); background: #dcecfa; }
+  .frame {
+    border-radius: 14px; overflow: hidden; flex: none;
+    border: 1px solid var(--line-2);
+    box-shadow: 0 2px 4px rgba(28,40,70,0.03), 0 26px 56px -40px rgba(28,40,90,0.28);
+  }
+  .frame.chosen { border-color: color-mix(in srgb, var(--sap) 40%, var(--line)); box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 26px 56px -36px rgba(0,112,192,0.4); }
+  .frame-bar { height: 38px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #f3f5f8; border-bottom: 1px solid rgba(28,28,24,0.07); }
+  .frame-bar i { width: 9px; height: 9px; border-radius: 999px; background: rgba(28,28,24,0.16); display: block; }
+  .frame-body {
+    flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 22px;
+    padding: 28px 24px; min-height: 344px;
+    background-color: color-mix(in srgb, var(--sap) 3%, #fff);
+  }
+  .frame.chosen .frame-body { background-color: var(--visual); }
+  /* drop slot for the Vercel screenshot */
+  .vercel-slot {
+    width: 100%; height: 150px; display: block; border-radius: 9px; overflow: hidden;
+    border: 1px dashed rgba(28,28,24,0.22); background: #fff;
+  }
+  /* flow diagram */
+  .flow {
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px;
+  }
+  .flow-node {
+    font-family: var(--sans); font-size: 12px; font-weight: 600; white-space: nowrap;
+    padding: 8px 13px; border-radius: 8px; background: #fff;
+  }
+  .flow-arrow { display: inline-flex; align-items: center; }
+  .flow.muted .flow-node { color: #6f6f67; border: 1px solid rgba(28,28,24,0.18); }
+  .flow.muted .flow-arrow { color: #b2b2aa; }
+  .flow.sap .flow-node {
+    color: #fff; background: var(--sap); border: 1px solid var(--sap);
+    font-size: 14px; padding: 12px 20px; box-shadow: 0 8px 20px -10px rgba(0,112,192,0.65);
+  }
+  .flow.sap .flow-arrow { color: var(--sap); }
+  .flow-cap {
+    text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 0.03em;
+  }
+  .flow-cap.muted { color: #8c8c82; }
+  .flow-cap.sap { color: var(--sap-deep); }
+  .cmp-screen { border-radius: 14px; }
+  .shotbox { aspect-ratio: 16 / 10; overflow: hidden; display: block; }
+  .shotbox img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .concept-note { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin-top: 16px; }
+
+  /* placeholder single frame (large) */
+  .ph-screen .ph-body {
+    aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center;
+    background-image: repeating-linear-gradient(135deg, rgba(0,112,192,0.07) 0 1.5px, transparent 1.5px 14px);
+    background-color: var(--visual);
+  }
+  .ph-label {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13px; letter-spacing: 0.01em;
+    color: color-mix(in srgb, var(--sap) 58%, var(--ink-faint));
+    background: color-mix(in srgb, #fff 70%, transparent); padding: 9px 16px; border-radius: 999px;
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sap) 18%, var(--line));
+  }
+
+  /* ---------- RESULT IMPACT ---------- */
+  .impact { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 14px; max-width: 64ch; }
+  .impact li {
+    display: grid; grid-template-columns: 30px 1fr; gap: 16px; align-items: start;
+    font-size: 16.5px; line-height: 1.62; color: var(--ink-soft);
+  }
+  .impact li strong { color: var(--ink); font-weight: 600; }
+  .impact .ic {
+    width: 30px; height: 30px; border-radius: 9px; background: #fff; color: var(--sap);
+    border: 1px solid color-mix(in srgb, var(--sap) 24%, var(--line));
+    display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 1px;
+  }
+
+  /* ---------- CLOSING / NEXT ---------- */
+  .closing { padding: 96px 0 24px; }
+  .closing .namaste {
+    font-family: var(--serif); font-weight: 600;
+    font-size: clamp(26px, 3.6vw, 42px); letter-spacing: -0.012em;
+    color: var(--ink); text-wrap: balance; max-width: 20ch;
+  }
+  .closing .sub { font-size: 15.5px; color: var(--ink-soft); margin-top: 18px; max-width: 50ch; line-height: 1.6; }
+
+  .nextcase {
+    margin: 64px 0 0; border-top: 1px solid var(--line); padding-top: 48px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .nx-k { font-size: 10.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 11px; }
+  .nx-t { font-family: var(--serif); font-weight: 600; font-size: clamp(22px, 3vw, 34px); color: var(--ink); }
+  a.nx-link {
+    display: inline-flex; align-items: center; gap: 9px; white-space: nowrap;
+    font-size: 14px; font-weight: 600; color: var(--paper);
+    background: var(--ink); text-decoration: none; padding: 14px 26px; border-radius: 999px;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+  a.nx-link:hover { transform: translateY(-2px); opacity: 0.92; }
+
+  footer { padding: 56px 0 72px; }
+  .foot-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+  .foot-meta { display: flex; gap: 22px; flex-wrap: wrap; }
+  .foot-meta a, .foot-copy { font-size: 13px; color: var(--ink-faint); text-decoration: none; }
+  .foot-meta a:hover { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 60px 24px 52px; }
+    section.block { padding: 56px 0; }
+    .meta { grid-template-columns: 1fr; gap: 26px; }
+    .compare { grid-template-columns: 1fr; gap: 32px; }
+    .nav-right { display: none; }
+    .nextcase { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <a class="nav-back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 3L4 7L8.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to work
+      </a>
+      <div class="nav-right">
+        <a class="nav-link" href="about.html">About</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero wrap" data-screen-label="Hero">
+    <svg class="sap-logo" viewBox="0 0 412.38 204" role="img" aria-label="SAP">
+      <defs>
+        <linearGradient id="sapGrad" x1="206.19" y1="0" x2="206.19" y2="204" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="#00b1eb"></stop>
+          <stop offset=".212" stop-color="#009ad9"></stop>
+          <stop offset=".519" stop-color="#007fc4"></stop>
+          <stop offset=".792" stop-color="#006eb8"></stop>
+          <stop offset="1" stop-color="#0069b4"></stop>
+        </linearGradient>
+      </defs>
+      <polyline fill="url(#sapGrad)" points="0 204 208.413 204 412.38 0 0 0 0 204"></polyline>
+      <path fill="#fff" d="m244.727,38.359l-40.593-.025v96.518l-35.46-96.518h-35.16l-30.277,80.716c-3.224-20.352-24.277-27.38-40.84-32.649-10.937-3.512-22.541-8.678-22.434-14.387.091-4.687,6.225-9.04,18.377-8.385,8.17.433,15.373,1.092,29.71,8.006l14.102-24.557c-13.088-6.658-31.169-10.867-45.985-10.883h-.086c-17.277,0-31.677,5.598-40.602,14.824-6.221,6.443-9.572,14.626-9.712,23.679-.227,12.454,4.341,21.292,13.938,28.338,8.104,5.944,18.468,9.794,27.603,12.626,11.27,3.492,20.467,6.526,20.36,13.002-.083,2.355-.977,4.552-2.671,6.337-2.807,2.897-7.124,3.986-13.084,4.098-11.497.243-20.026-1.559-33.61-9.585l-12.536,24.903c13.546,7.705,29.586,12.223,45.952,12.223l2.106-.024c14.247-.256,25.745-4.316,34.929-11.712.527-.416,1.001-.845,1.488-1.277l-4.073,10.874h36.875l6.189-18.822c6.477,2.214,13.847,3.437,21.676,3.437,7.618,0,14.795-1.17,21.156-3.252l5.965,18.637h60.137v-38.969h13.113c31.706,0,50.456-16.147,50.456-43.202,0-30.139-18.219-43.969-57.011-43.969Zm-93.816,82.587c-4.737,0-9.177-.828-13.006-2.275l12.866-40.593h.244l12.643,40.708c-3.801,1.349-8.138,2.16-12.746,2.16Zm96.199-23.324h-8.941v-32.711h8.941c11.927,0,21.437,3.961,21.437,16.139,0,12.602-9.51,16.572-21.437,16.572"></path>
+    </svg>
+    <span class="label">Developer Experience · SAP Build · 2025</span>
+    <h1 class="title">Designing the developer experience SAP was missing.</h1>
+    <p class="hero-sub">Two audiences. One experience. Built inside SAP.</p>
+
+    <div class="meta">
+      <div>
+        <div class="meta-k">Role</div>
+        <div class="meta-v">UX Design Lead<span class="sub">Co-led research, owned interviews &amp; synthesis, proposed the core deployment flow</span></div>
+      </div>
+      <div>
+        <div class="meta-k">Team</div>
+        <div class="meta-v">Me + 1 research partner<span class="sub">Alongside a PM and engineering lead</span></div>
+      </div>
+      <div>
+        <div class="meta-k">Methods</div>
+        <div class="meta-v">Research &amp; concept design<span class="sub">Interviews · Competitive analysis · Concept · Workshop</span></div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div>
+        <div class="stat-n">8+</div>
+        <div class="stat-l">Internal interviews conducted</div>
+      </div>
+      <div>
+        <div class="stat-n">2</div>
+        <div class="stat-l">Design concepts explored</div>
+      </div>
+      <div>
+        <div class="stat-n">1</div>
+        <div class="stat-l">Principle adopted across the platform</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== 01 · THE MISSION ===================== -->
+  <section class="block" data-screen-label="01 The mission">
+    <div class="wrap read">
+      <span class="label">01: The Mission</span>
+      <h2 class="h2">Define. Visualize. Don't add complexity.</h2>
+      <p class="lead">Define and visualize an end-to-end developer experience for CAP application and agent development across VS&nbsp;Code, Cursor, and Windsurf, complementing the SAP&nbsp;Build vision. <strong>Complement SAP&nbsp;Build. Don't add complexity.</strong></p>
+      <details class="more">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>SAP&nbsp;Build had grown into a family of tools: Build Apps, Build Process Automation, Build Work Zone. Each served a purpose. But together, they'd become hard to navigate, even for people inside SAP. Our job was to find a way through.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- VISUAL · Build entry point -->
+  <section class="figblock" data-screen-label="Visual ecosystem">
+    <div class="wrap figwide">
+      <figure class="fig">
+        <div class="fig-title">The entry point</div>
+        <div class="screen">
+          <div class="screen-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com</span>
+          </div>
+          <img class="shot crop" src="uploads/step1-prompt_small.png" alt="SAP Build: the entry point, where the experience begins with a sentence" style="object-position: center;" />
+        </div>
+        <figcaption class="fig-cap">
+          <div class="fig-cap-body">
+            <div class="fig-lead">"The whole SAP Build family, reduced to one open question: what's next?"</div>
+            <p>The starting surface for the ecosystem overview, where a developer or a business user begins, in plain language, without first having to learn which "Build" they need.</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== 02 · INTO THE FIELD ===================== -->
+  <section class="block" data-screen-label="02 Into the field">
+    <div class="wrap read">
+      <span class="label">02: User Research · Developer Interviews</span>
+      <h2 class="h2">We went to talk to developers. They were exhausted.</h2>
+      <p class="lead">We interviewed internal developers, engineering managers, and product managers. What we heard wasn't a feature request. It was frustration.</p>
+      <details class="more">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>The confusion wasn't just about naming. It was about cognitive load: developers spending mental energy navigating SAP's tool landscape instead of building. Every context switch had a cost.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE · DJ Adams -->
+  <section class="block tint" data-screen-label="Quote DJ Adams">
+    <div class="wrap">
+      <div class="pqwrap read" style="max-width: 920px;">
+        <p class="pullquote lg">"I gave up a long time ago trying to figure out what everything was with the word Build in it."</p>
+        <p class="pq-cite">DJ Adams · Developer Advocate, SAP</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 · THE SHIFT ===================== -->
+  <section class="block" data-screen-label="03 The shift">
+    <div class="wrap read">
+      <span class="label">03: Mid-Research · Strategic Pivot</span>
+      <h2 class="h2">Halfway through, the brief changed.</h2>
+      <p class="lead">Mid-research, SAP expanded the scope: the experience needed to serve not just developers, but business users too. That's when the real design challenge came into focus.</p>
+      <p class="statement">Developers switch tools. <span class="em">Business users abandon them.</span></p>
+      <details class="more">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>Developers are comfortable moving between IDEs, terminals, and platforms. It's part of how they work. Business users like Sarah aren't. Every additional tool is friction. Every context switch is a reason to stop.</p>
+          <p>The solution couldn't just be better tooling for developers. It had to be invisible infrastructure for everyone else.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== 04 · THE INSIGHT ===================== -->
+  <section class="block" data-screen-label="04 The insight">
+    <div class="wrap read">
+      <span class="label">04: Design Principle · White-Label Approach</span>
+      <h2 class="h2">The answer wasn't another tool. It was one seamless experience.</h2>
+      <p class="lead">Instead of building a new surface, we embedded the experience inside what users already trusted. A white-label approach: powerful technology, invisible seams, one familiar environment.</p>
+
+      <figure class="video">
+        <div class="video-embed">
+          <video class="lazy-video" src="uploads/sap-concept-v2.mp4" preload="none" muted loop playsinline controls></video>
+        </div>
+        <figcaption class="video-cap">This is what Deploy to BTP looks like for someone who's never deployed anything.</figcaption>
+      </figure>
+
+      <details class="more">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>White labeling meant that whether a developer was in VS&nbsp;Code or a business user was in SAP&nbsp;Build, they were experiencing the same underlying capability, without knowing it. The tool faded away. The work stayed.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- VISUAL · Embedded experience -->
+  <section class="figblock" data-screen-label="Visual embedded">
+    <div class="wrap figwide">
+      <figure class="fig">
+        <div class="fig-title">Embedded experience</div>
+        <div class="screen">
+          <div class="screen-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com / studio</span>
+          </div>
+          <img class="shot crop" src="uploads/step5-prototype.png" alt="The build experience embedded inside SAP — generation and preview side by side" style="object-position: center;" />
+        </div>
+        <figcaption class="fig-cap">
+          <div class="fig-cap-body">
+            <div class="fig-lead">"Same capability, two audiences, and no one has to leave home to use it."</div>
+            <p>The studio sits inside the environment users already trust. A plain-language request becomes a working app on the right, with no new surface to learn and no seams showing.</p>
+            <p class="fig-note">AI-generated prototype, shown for illustrative purposes.</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== 05 · THE CHOICE ===================== -->
+  <section class="block" data-screen-label="05 The choice">
+    <div class="wrap">
+      <div class="read">
+        <span class="label">05: Two Concepts · Design Decision</span>
+        <h2 class="h2">Two concepts. One kept users where they belonged.</h2>
+        <p class="lead">We explored two directions. Both worked technically. Only one felt right for the user.</p>
+      </div>
+
+      <div class="compare">
+        <div class="concept">
+          <div class="concept-head">
+            <span class="concept-name"><span class="ab">A</span>Vercel-first</span>
+            <span class="badge no">✕ Not chosen</span>
+          </div>
+          <div class="screen cmp-screen">
+            <div class="screen-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> v0.dev</span>
+            </div>
+            <div class="shotbox"><img src="uploads/1920w light.png" alt="Concept A: build starts in Vercel" /></div>
+          </div>
+          <p class="concept-note">Powerful and familiar to developers, but it asked business users to leave their environment to finish the job.</p>
+        </div>
+
+        <div class="concept">
+          <div class="concept-head">
+            <span class="concept-name"><span class="ab">B</span>SAP-first</span>
+            <span class="badge yes">✓ Chosen</span>
+          </div>
+          <div class="screen cmp-screen">
+            <div class="screen-bar">
+              <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+              <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com</span>
+            </div>
+            <div class="shotbox"><img src="uploads/Build Dialog.png" alt="Concept B: everything stays in SAP" /></div>
+          </div>
+          <p class="concept-note">Same technology underneath, but the experience never left SAP. The moment a business user has to leave, we've already lost them.</p>
+        </div>
+      </div>
+
+      <details class="more" style="margin-top: 34px;">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>Concept A started in Vercel: powerful, familiar to developers, but required business users to leave their environment. Concept B kept everything inside SAP. The technology was the same. The experience was completely different.</p>
+          <p>We chose B because the moment a business user has to leave SAP, we've already lost them.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- ===================== 06 · THE DECISION ===================== -->
+  <section class="block" data-screen-label="06 The decision">
+    <div class="wrap read">
+      <span class="label">06: Business Impact · Deploy to BTP</span>
+      <h2 class="h2">One button, in the right place, made the business goal reachable.</h2>
+      <p class="lead">Through synthesis of our interviews, I proposed <strong>Deploy to BTP</strong>: a single action that takes a business user from "I built something" to "it's live," without ever needing to understand the infrastructure behind it. It became the project's most critical business decision.</p>
+      <details class="more">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>SAP's business model depends on deployments to BTP. Every app that lives outside the ecosystem is revenue that doesn't happen. By keeping the experience inside SAP and making deployment a single, trusted action, we turned a UX decision into a business outcome.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- VISUAL · Deploy to BTP (HERO SHOT) -->
+  <section class="figblock" data-screen-label="Visual deploy hero">
+    <div class="wrap figwide">
+      <figure class="fig">
+        <div class="fig-title">Deploy to BTP</div>
+        <div class="screen hero-shot">
+          <div class="screen-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com / deploy</span>
+          </div>
+          <img class="shot" src="uploads/pasted-1782547697750-0.png" alt="Deploy to BTP modal — one trusted action takes a build live" />
+        </div>
+        <figcaption class="fig-cap">
+          <div class="fig-cap-body">
+            <div class="fig-lead">"One button. The whole platform's promise compressed into it."</div>
+            <p>From "I built something" to "it's live," without the user ever needing to know what BTP is, or that infrastructure exists at all. Even the choice to show or hide SAP branding lives right here, baking the white-label principle into the decision itself.</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== 07 · THE RESULT ===================== -->
+  <section class="block" data-screen-label="07 The result">
+    <div class="wrap read">
+      <span class="label">07: Impact · Reflection</span>
+      <h2 class="h2">The work found its way forward.</h2>
+      <p class="lead">The solution was presented at an internal workshop in Germany, and received with enthusiasm. Working closely with a PM and engineering lead, we proposed a direction: embedded, seamless, deployment-first, in collaboration with Vercel. Shortly after, SAP launched a platform moving in exactly this direction at Sapphire.</p>
+      <ul class="impact">
+        <li><span class="ic">→</span><span><strong>Deploy to BTP</strong> moved from a research proposal to one of the project's defining decisions.</span></li>
+        <li><span class="ic">→</span><span>The pivot from standalone to <strong>white-label, embedded</strong> became a principle that shaped the platform well beyond our scope.</span></li>
+      </ul>
+      <details class="more">
+        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
+        <div class="more-body">
+          <p>What I'm proudest of isn't a screen. It's that a UX decision and a business goal turned out to be the same thing, and that the work we did in research shaped something that made it to one of SAP's biggest stages.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- VISUAL · Result / live agent -->
+  <section class="figblock" data-screen-label="Visual result">
+    <div class="wrap figwide">
+      <figure class="fig">
+        <div class="fig-title">The payoff</div>
+        <div class="screen">
+          <div class="screen-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> sap-invoice-monitoring-app.btp.app</span>
+          </div>
+          <img class="shot crop" src="uploads/Testing -_ Design.png" alt="The deployed, live agent running in production" style="object-position: center top;" />
+        </div>
+        <figcaption class="fig-cap">
+          <div class="fig-cap-body">
+            <div class="fig-lead">"A sentence became a live agent, running, in production, inside SAP."</div>
+            <p>The deployment-first direction in motion: a plain-language request, built and shipped, now monitoring in real time: the shape of the platform vision that surfaced at Sapphire.</p>
+            <p class="fig-note">AI-generated prototype, shown for illustrative purposes.</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ===================== CLOSING ===================== -->
+  <section class="wrap closing" data-screen-label="Closing">
+    <p class="namaste">A research insight and a business goal turned out to be the same decision.</p>
+    <p class="sub">The work proposed a direction SAP went on to pursue: embedded, seamless, deployment-first.</p>
+
+    <div class="nextcase">
+      <div>
+        <div class="nx-k">Next</div>
+        <div class="nx-t">Safe Pregnancy</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:26px;">
+        <a class="nx-link" href="safe-pregnancy-case-study.html">
+          Next project
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a style="font-size:13.5px;font-weight:600;color:var(--ink-faint);text-decoration:none;" href="index.html#work">All projects</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot-inner">
+      <span class="foot-copy">© 2026, Portfolio</span>
+      <div class="foot-meta">
+        <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Below-the-fold videos: only load/play while on screen.
+    const lazyVideos = document.querySelectorAll('.lazy-video');
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+    lazyVideos.forEach((video) => videoObserver.observe(video));
+  </script>
+
+</body>
+</html>

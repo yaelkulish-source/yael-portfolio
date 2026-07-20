@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+    --ink: oklch(0.24 0.012 60);
+    --ink-soft: oklch(0.46 0.012 60);
+    --ink-faint: oklch(0.62 0.012 60);
+    --line: oklch(0.90 0.006 70);
+    --paper: oklch(0.992 0.004 80);
+
+    /* Section tints */
+    --peach: oklch(0.955 0.022 50);
+    --peach-line: oklch(0.90 0.03 50);
+    --gray: oklch(0.962 0.004 240);
+    --gray-line: oklch(0.90 0.006 240);
+    --lilac: oklch(0.955 0.022 300);
+    --lilac-line: oklch(0.90 0.03 300);
+
+    /* Muted accents per section */
+    --acc-green: oklch(0.52 0.075 158);
+    --acc-blue:  oklch(0.54 0.10 255);
+    --acc-purple: oklch(0.52 0.10 305);
+
+    --maxw: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklch, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+  }
+  nav.scrolled { border-bottom-color: var(--line); }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; height: 76px;
+  }
+  .nav-link {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--ink-soft); text-decoration: none;
+    padding: 9px 18px; border-radius: 999px;
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link.active {
+    color: var(--ink);
+    background: oklch(0.97 0.006 70);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 80px 0 96px; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 64px; align-items: center;
+  }
+  .hero-text { text-align: left; }
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-faint);
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 30px;
+  }
+  .eyebrow::before {
+    content: ""; width: 28px; height: 1px; background: var(--line);
+  }
+
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(48px, 6.4vw, 96px);
+    line-height: 0.96;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .role {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: clamp(20px, 2.3vw, 30px);
+    letter-spacing: -0.01em; line-height: 1.25;
+    color: oklch(0.36 0.012 60);
+    margin: 20px 0 0;
+  }
+  .subtitle {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: clamp(13px, 1.25vw, 16px);
+    line-height: 1.5;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    max-width: 30ch;
+    margin: 26px 0 0;
+  }
+
+  .intro {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 17px; line-height: 1.68;
+    color: var(--ink-soft);
+    max-width: 44ch;
+    margin: 32px 0 0;
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-top: 38px;
+    font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+    color: var(--ink); text-decoration: none;
+    padding: 13px 26px; border-radius: 999px;
+    background: var(--ink); color: var(--paper);
+    transition: transform 0.18s ease, opacity 0.18s ease;
+  }
+  .hero-cta:hover { transform: translateY(-2px); opacity: 0.92; }
+  .hero-cta svg { transition: transform 0.18s ease; }
+  .hero-cta:hover svg { transform: translate(3px, -3px); }
+
+  /* ---------- HERO ARTIFACTS (right-side collage) ---------- */
+  .hero-art {
+    position: relative;
+    height: 460px;
+    --g-line: oklch(0.86 0.004 250);
+    --g-line-soft: oklch(0.92 0.003 250);
+    --g-fill: oklch(0.95 0.002 250);
+    --g-ink: oklch(0.55 0.006 250);
+    --g-card: oklch(0.995 0.002 250);
+  }
+  .art {
+    position: absolute;
+    background: var(--g-card);
+    border: 1px solid var(--g-line-soft);
+    border-radius: 12px;
+    box-shadow: 0 1px 2px rgba(40,40,50,0.04), 0 30px 60px -34px rgba(40,40,55,0.26);
+  }
+  .art-label {
+    position: absolute; top: 12px; left: 14px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: oklch(0.66 0.004 250);
+  }
+
+  /* Back: architectural wireframe grid */
+  .art-wire { top: 0; right: 0; width: 320px; height: 300px; padding: 34px 18px 18px; }
+  .art-wire .wire-head { height: 22px; border-radius: 5px; background: var(--g-fill); margin-bottom: 12px; }
+  .art-wire .wire-row { display: grid; grid-template-columns: 78px 1fr; gap: 12px; height: calc(100% - 34px); }
+  .art-wire .wire-side { display: flex; flex-direction: column; gap: 8px; }
+  .art-wire .wire-side span { height: 13px; border-radius: 4px; background: var(--g-fill); }
+  .art-wire .wire-side span:nth-child(3) { width: 70%; }
+  .art-wire .wire-main { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 1fr; gap: 10px; }
+  .art-wire .wire-main b { border: 1px dashed var(--g-line); border-radius: 6px; display: block; }
+  .art-wire .wire-main b:first-child { grid-column: 1 / -1; }
+
+  /* Mid: user-flow diagram with connecting nodes */
+  .art-flow { bottom: 14px; left: 0; width: 300px; height: 220px; transform: rotate(-3deg); padding: 30px 16px 16px; }
+  .art-flow svg { width: 100%; height: 100%; display: block; }
+
+  /* Front: layered UI component overlay */
+  .art-ui { bottom: 0; right: 22px; width: 210px; padding: 14px; transform: rotate(2.5deg); }
+  .art-ui .ui-bar { height: 8px; border-radius: 999px; background: var(--g-fill); margin-bottom: 10px; }
+  .art-ui .ui-bar.sm { width: 55%; }
+  .art-ui .ui-row { display: flex; align-items: center; gap: 9px; padding: 8px 0; border-top: 1px solid var(--g-line-soft); }
+  .art-ui .ui-row:first-of-type { border-top: none; }
+  .art-ui .ui-dot { width: 18px; height: 18px; border-radius: 6px; background: var(--g-fill); flex: none; }
+  .art-ui .ui-dot.ink { background: var(--g-ink); }
+  .art-ui .ui-lines { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+  .art-ui .ui-lines span { height: 6px; border-radius: 999px; background: var(--g-fill); }
+  .art-ui .ui-lines span:last-child { width: 60%; }
+  .art-ui .ui-toggle { width: 30px; height: 17px; border-radius: 999px; background: var(--g-ink); flex: none; position: relative; }
+  .art-ui .ui-toggle::after { content: ""; position: absolute; top: 2.5px; right: 2.5px; width: 12px; height: 12px; border-radius: 999px; background: var(--g-card); }
+
+  /* ---------- PROJECT SECTIONS ---------- */
+  .project { padding: 104px 0; border-top: 1px solid transparent; position: relative; cursor: pointer; }
+  .card-cover { position: absolute; inset: 0; z-index: 1; }
+  .project:hover .p-visual { transform: translateY(-4px); }
+  .project:hover .screenshot, .project:hover .ph { box-shadow: 0 4px 10px -2px rgba(40,30,20,0.14), 0 40px 70px -32px rgba(40,30,20,0.4); }
+  .project:hover .pd-phone { box-shadow: 0 4px 10px -2px rgba(40,30,20,0.14), 0 40px 70px -32px rgba(40,30,20,0.4); }
+  .p-visual { transition: transform 0.28s ease; }
+  .p-link { pointer-events: none; }
+  .project.peach  { background: var(--peach);  --acc: var(--acc-green); }
+  .project.gray   { background: var(--gray);   --acc: var(--acc-blue); }
+  .project.safe   { background: #FAF4F2;       --acc: #9E6060; }
+  .project.lilac  { background: var(--lilac);  --acc: var(--acc-purple); }
+  .project.sap    { background: #EEF4FB;       --acc: #0070C0; }
+  .project.bubbles{ background: #E8F9F7;       --acc: #1FA090; }
+
+  .sap-mini { height: 15px; width: auto; display: block; }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    gap: 72px; align-items: center;
+  }
+  .project.proj-feature .project-grid {
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+    gap: 64px;
+  }
+  .ph-shot { display: block; width: 100%; height: auto; }
+
+  .p-eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--acc);
+    margin-bottom: 22px;
+  }
+  .p-eyebrow .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--acc); }
+
+  h2.p-title {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: clamp(28px, 3.4vw, 40px);
+    line-height: 1.12; letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .p-meta {
+    font-family: var(--sans);
+    font-weight: 500; font-size: 14.5px; letter-spacing: 0.01em;
+    color: var(--ink-soft);
+    margin-top: 20px;
+  }
+  .p-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-top: 36px;
+    font-family: var(--sans); font-size: 14.5px; font-weight: 600;
+    color: var(--ink); text-decoration: none;
+    padding-bottom: 4px; border-bottom: 1.5px solid var(--ink);
+    transition: gap 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+  .project:hover .p-link:not(.muted) { gap: 13px; color: var(--acc); border-color: var(--acc); }
+  .p-link.muted {
+    color: var(--ink-faint); border: none; padding: 0;
+    font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; font-size: 12.5px;
+    cursor: default;
+  }
+  .p-link.muted:hover { gap: 8px; color: var(--ink-faint); }
+
+  /* ---------- BARE DESKTOP SCREENSHOT (no chrome, soft shadow) ---------- */
+  .screenshot {
+    display: block; width: 100%; height: auto;
+    border-radius: 10px;
+    box-shadow:
+      0 2px 6px -2px rgba(40,30,20,0.10),
+      0 30px 60px -30px rgba(40,30,20,0.34);
+  }
+
+  /* ---------- PLACEHOLDER VISUALS ---------- */
+  .ph {
+    position: relative; border-radius: 14px; overflow: hidden;
+    background: var(--paper);
+    box-shadow: 0 1px 2px rgba(40,30,20,0.04), 0 24px 50px -28px rgba(40,30,20,0.28);
+    border: 1px solid color-mix(in oklch, var(--acc) 16%, var(--line));
+  }
+  .ph-bar {
+    height: 38px; display: flex; align-items: center; gap: 7px;
+    padding: 0 16px;
+    background: oklch(0.975 0.004 80);
+    border-bottom: 1px solid var(--line);
+  }
+  .ph-bar i { width: 10px; height: 10px; border-radius: 999px; background: var(--line); display: block; }
+  .ph-body {
+    aspect-ratio: 16 / 10;
+    display: flex; align-items: center; justify-content: center;
+    background-image:
+      repeating-linear-gradient(135deg,
+        color-mix(in oklch, var(--acc) 7%, transparent) 0 1.5px,
+        transparent 1.5px 13px);
+    background-color: color-mix(in oklch, var(--acc) 3.5%, var(--paper));
+  }
+  .ph-label {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 12.5px; letter-spacing: 0.02em;
+    color: color-mix(in oklch, var(--acc) 60%, var(--ink-faint));
+    background: color-mix(in oklch, var(--paper) 70%, transparent);
+    padding: 7px 14px; border-radius: 999px;
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--acc) 18%, var(--line));
+  }
+
+  /* Phone duo */
+  .phones { display: flex; justify-content: center; align-items: flex-end; gap: 26px; }
+  .phone {
+    width: 200px; aspect-ratio: 9 / 19;
+    border-radius: 30px; padding: 10px;
+    background: var(--paper);
+    border: 1px solid color-mix(in oklch, var(--acc) 16%, var(--line));
+    box-shadow: 0 1px 2px rgba(40,40,60,0.05), 0 26px 50px -26px rgba(40,40,60,0.32);
+  }
+  .phone.lift { margin-bottom: 38px; }
+  .phone-screen {
+    height: 100%; border-radius: 21px;
+    display: flex; align-items: center; justify-content: center;
+    background-image:
+      repeating-linear-gradient(135deg,
+        color-mix(in oklch, var(--acc) 8%, transparent) 0 1.5px,
+        transparent 1.5px 12px);
+    background-color: color-mix(in oklch, var(--acc) 4%, var(--paper));
+  }
+  .phone-screen .ph-label { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; padding: 12px 6px; }
+
+  /* Phone + laptop duo */
+  .device-duo { display: flex; align-items: flex-end; justify-content: center; }
+  .pd-phone {
+    flex: none; width: 186px; aspect-ratio: 9 / 20;
+    border-radius: 12px; overflow: hidden;
+    position: relative; z-index: 2;
+    margin-right: -30px; margin-bottom: 30px;
+    box-shadow:
+      0 2px 6px -2px rgba(40,30,20,0.10),
+      0 30px 60px -30px rgba(40,30,20,0.34);
+  }
+  .pd-phone video, .pd-phone img { width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 12px; display: block; }
+  .pd-laptop { flex: none; width: 470px; max-width: 100%; position: relative; z-index: 1; }
+  .pd-laptop .screenshot { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; }
+  .pd-laptop-screen {
+    background: #241A1A; border-radius: 14px 14px 0 0;
+    padding: 12px 12px 0;
+    box-shadow: 0 24px 48px -24px rgba(45,31,31,0.45);
+  }
+  .pd-laptop-screen video, .pd-laptop-screen img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; border-radius: 6px 6px 0 0; display: block; }
+  .pd-laptop-base {
+    width: calc(100% + 46px); margin-left: -23px; height: 13px;
+    background: linear-gradient(#cbbab6, #b7a29e);
+    border-radius: 0 0 13px 13px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.14);
+    position: relative;
+  }
+  .pd-laptop-base::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 74px; height: 6px; background: rgba(0,0,0,0.12);
+    border-radius: 0 0 7px 7px;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 96px 0 84px; text-align: center; }
+  .foot-k {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(26px, 4vw, 40px); color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .foot-mail {
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1.5px solid var(--ink); padding-bottom: 3px;
+    transition: opacity 0.18s ease;
+  }
+  .foot-mail:hover { opacity: 0.6; }
+  .foot-meta {
+    margin-top: 40px; font-family: var(--sans); font-size: 12.5px;
+    letter-spacing: 0.04em; color: var(--ink-faint);
+    display: flex; gap: 22px; justify-content: center; flex-wrap: wrap;
+  }
+  .foot-meta a { color: var(--ink-faint); text-decoration: none; }
+  .foot-meta a:hover { color: var(--ink); }
+
+  @media (max-width: 940px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-art { height: 400px; max-width: 460px; }
+  }
+  @media (max-width: 820px) {
+    .wrap { padding: 0 24px; }
+    .hero { padding: 56px 0 64px; }
+    .project { padding: 72px 0; }
+    .project-grid { grid-template-columns: 1fr; gap: 44px; }
+    .phone { width: 158px; }
+    .pd-phone { width: 150px; margin-right: -22px; margin-bottom: 22px; }
+    .pd-laptop { width: 360px; }
+  }
+</style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <a class="nav-link" href="about.html">About</a>
+    </div>
+  </nav>
+
+  <header class="hero wrap" data-screen-label="Hero">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Selected Work · 2026</span>
+        <h1 class="title">Yael Kulish</h1>
+        <p class="role">Senior UX Designer</p>
+        <p class="intro">Enterprise, medical, and consumer products.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="work">
+
+    <!-- PROJECT 01 -->
+    <section class="project sap proj-feature" data-screen-label="Project 01">
+      <a class="card-cover" href="sap-case-study.html" aria-label="View SAP AI Platform case study"></a>
+      <div class="wrap project-grid">
+        <div class="p-text">
+          <span class="p-eyebrow">
+            <svg class="sap-mini" viewBox="0 0 412.38 204" role="img" aria-label="SAP">
+              <defs>
+                <linearGradient id="sapGradHome" x1="206.19" y1="0" x2="206.19" y2="204" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#00b1eb"></stop>
+                  <stop offset=".212" stop-color="#009ad9"></stop>
+                  <stop offset=".519" stop-color="#007fc4"></stop>
+                  <stop offset=".792" stop-color="#006eb8"></stop>
+                  <stop offset="1" stop-color="#0069b4"></stop>
+                </linearGradient>
+              </defs>
+              <polyline fill="url(#sapGradHome)" points="0 204 208.413 204 412.38 0 0 0 0 204"></polyline>
+              <path fill="#fff" d="m244.727,38.359l-40.593-.025v96.518l-35.46-96.518h-35.16l-30.277,80.716c-3.224-20.352-24.277-27.38-40.84-32.649-10.937-3.512-22.541-8.678-22.434-14.387.091-4.687,6.225-9.04,18.377-8.385,8.17.433,15.373,1.092,29.71,8.006l14.102-24.557c-13.088-6.658-31.169-10.867-45.985-10.883h-.086c-17.277,0-31.677,5.598-40.602,14.824-6.221,6.443-9.572,14.626-9.712,23.679-.227,12.454,4.341,21.292,13.938,28.338,8.104,5.944,18.468,9.794,27.603,12.626,11.27,3.492,20.467,6.526,20.36,13.002-.083,2.355-.977,4.552-2.671,6.337-2.807,2.897-7.124,3.986-13.084,4.098-11.497.243-20.026-1.559-33.61-9.585l-12.536,24.903c13.546,7.705,29.586,12.223,45.952,12.223l2.106-.024c14.247-.256,25.745-4.316,34.929-11.712.527-.416,1.001-.845,1.488-1.277l-4.073,10.874h36.875l6.189-18.822c6.477,2.214,13.847,3.437,21.676,3.437,7.618,0,14.795-1.17,21.156-3.252l5.965,18.637h60.137v-38.969h13.113c31.706,0,50.456-16.147,50.456-43.202,0-30.139-18.219-43.969-57.011-43.969Zm-93.816,82.587c-4.737,0-9.177-.828-13.006-2.275l12.866-40.593h.244l12.643,40.708c-3.801,1.349-8.138,2.16-12.746,2.16Zm96.199-23.324h-8.941v-32.711h8.941c11.927,0,21.437,3.961,21.437,16.139,0,12.602-9.51,16.572-21.437,16.572"></path>
+            </svg>
+            AI Platform · UX Research · SAP
+          </span>
+          <h2 class="p-title">What if enterprise software worked like a conversation?</h2>
+          <p class="p-meta">Enterprise Platform • Strategy &amp; UX • AI Integration</p>
+          <a class="p-link" href="sap-case-study.html">
+            View case study
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="p-visual">
+          <img class="screenshot" src="uploads/Build Dialog-49bfd744.png" alt="SAP Build: What would you like to build? dialog" />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 02 -->
+    <section class="project safe" data-screen-label="Project 02">
+      <a class="card-cover" href="safe-pregnancy-case-study.html" aria-label="View Safe Pregnancy case study"></a>
+      <div class="wrap project-grid">
+        <div class="p-text">
+          <span class="p-eyebrow"><span class="dot"></span>Project 02 · Thera</span>
+          <h2 class="p-title">When the doctor isn't in the room</h2>
+          <p class="p-meta">Medical Device • End-to-End • Regulatory Approval</p>
+          <a class="p-link" href="safe-pregnancy-case-study.html">
+            View case study
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="p-visual">
+          <div class="device-duo">
+            <div class="pd-phone">
+              <img src="uploads/Home Page 1-44b72e5e.png" alt="Safe Pregnancy patient app: Lia's home screen" />
+            </div>
+            <div class="pd-laptop">
+              <img class="screenshot" src="uploads/HPD.png" alt="Safe Pregnancy clinician dashboard: Dr. Harel's patient list" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 03 -->
+    <section class="project bubbles" data-screen-label="Project 03">
+      <a class="card-cover" href="we-bubbles-case-study.html" aria-label="View WE Bubbles case study"></a>
+      <div class="wrap project-grid">
+        <div class="p-text">
+          <span class="p-eyebrow"><span class="dot"></span>WE Bubbles · Community Learning · 0→1</span>
+          <h2 class="p-title">A home for a community too big for WhatsApp</h2>
+          <p class="p-meta">Community Platform • End-to-End • 0→1</p>
+          <a class="p-link" href="we-bubbles-case-study.html">
+            View case study
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+        <div class="p-visual">
+          <img class="screenshot" src="assets/we-landing-page.png" alt="WE Learn landing page — Bubbles grid and search" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer data-screen-label="Footer">
+    <div class="wrap">
+      <p class="foot-k">Let's build something thoughtful.</p>
+      <a class="foot-mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">yaelkulish@gmail.com</a>
+      <div class="foot-meta">
+        <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span>© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+
+</body>
+</html>

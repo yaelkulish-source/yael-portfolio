@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About — Yael Kulish</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;0,900;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --serif: "Playfair Display", Georgia, serif;
+    --sans: "Plus Jakarta Sans", system-ui, sans-serif;
+
+    --ink: oklch(0.24 0.012 60);
+    --ink-soft: oklch(0.46 0.012 60);
+    --ink-faint: oklch(0.62 0.012 60);
+    --line: oklch(0.90 0.006 70);
+    --paper: oklch(0.992 0.004 80);
+
+    --peach: oklch(0.955 0.022 50);
+    --peach-line: oklch(0.90 0.03 50);
+
+    --acc: oklch(0.52 0.075 158);
+
+    --maxw: 1120px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+
+  a { color: var(--ink); }
+  a:hover { color: var(--acc); }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in oklch, var(--paper) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; height: 76px;
+  }
+  .nav-link {
+    font-size: 14px; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--ink-soft); text-decoration: none;
+    padding: 9px 18px; border-radius: 999px;
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+  .nav-link:hover { color: var(--ink); }
+  .nav-link.active {
+    color: var(--ink);
+    background: oklch(0.97 0.006 70);
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-head { padding-top: 72px; padding-bottom: 8px; }
+  .eyebrow {
+    font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 22px;
+  }
+  h1.title {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(40px, 5.2vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  /* ---------- ABOUT SECTIONS ---------- */
+  .about-section { padding: 72px 0; }
+  .about-section + .about-section { border-top: 1px solid var(--line); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .about-section.reverse .about-grid { grid-template-columns: 0.85fr 1.3fr; }
+  .about-section.reverse .about-media { order: 2; }
+  .about-section.reverse .about-text { order: 1; }
+
+  .about-media img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(40,30,20,0.04), 0 24px 50px -28px rgba(40,30,20,0.24);
+  }
+
+  .about-section.reverse .about-media img {
+    border: none;
+    box-shadow: none;
+    background: none;
+  }
+
+  h2.section-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(26px, 2.8vw, 34px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 26px;
+  }
+
+  .about-text p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+  .about-text p + p { margin-top: 22px; }
+
+  @media (max-width: 860px) {
+    .wrap { padding: 0 24px; }
+    .about-grid,
+    .about-section.reverse .about-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    .about-section.reverse .about-media,
+    .about-section.reverse .about-text { order: initial; }
+    .about-text p { max-width: none; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer { padding: 96px 0 84px; text-align: center; }
+  .foot-k {
+    font-family: var(--serif); font-style: italic; font-weight: 500;
+    font-size: clamp(26px, 4vw, 40px); color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .foot-mail {
+    font-family: var(--sans); font-weight: 600; font-size: 16px;
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1.5px solid var(--ink); padding-bottom: 3px;
+    transition: opacity 0.18s ease;
+  }
+  .foot-mail:hover { opacity: 0.6; color: var(--ink); }
+  .foot-meta {
+    margin-top: 40px; font-size: 12.5px;
+    letter-spacing: 0.04em; color: var(--ink-faint);
+    display: flex; gap: 22px; justify-content: center; flex-wrap: wrap;
+  }
+  .foot-meta a { color: var(--ink-faint); text-decoration: none; }
+  .foot-meta a:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="wrap nav-inner">
+      <a class="nav-link" href="index.html">Work</a>
+      <a class="nav-link active" href="about.html">About</a>
+    </div>
+  </nav>
+
+  <header class="page-head wrap" data-screen-label="About Header">
+    <p class="eyebrow">About</p>
+    <h1 class="title">Yael Kulish</h1>
+  </header>
+
+  <main>
+
+    <section class="about-section" data-screen-label="About Intro">
+      <div class="wrap about-grid">
+        <div class="about-media">
+          <img src="uploads/Yael-26ffc68f.jpeg" alt="Yael Kulish" />
+        </div>
+        <div class="about-text">
+          <p>Most UX designers start with screens. I started with the human body: designing products worn directly on it, thinking about fit, comfort, and how something holds up through real, everyday movement. There's a thin thread running through my career: much of what I did as an industrial designer was, in practice, UX work, running clinical trials, usability testing, and working closely with product teams, thinking holistically about the physical and digital product together, as one complete experience.</p>
+          <p>That's the lens I brought to Safe Pregnancy, an FDA-cleared wearable for high-risk pregnancy monitoring: designing not just the app, but how a physical device, a clinical workflow, and a worried patient at 2am all had to work together. It's the same lens I used at SAP, translating a technical AI platform into something a business user could actually build with, without ever opening a ticket to IT, and it's the lens I'm applying now to We Learn, a learning platform for a community of women I'm part of.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section reverse" data-screen-label="When Not Working">
+      <div class="wrap about-grid">
+        <div class="about-text">
+          <h2 class="section-title">When I'm not working</h2>
+          <p>I live on a kibbutz, where I help run the community's cultural life and a schnitzel stand I built a small ordering system for. I garden, practice yoga daily, and spend time on hands-on projects, from an organic winter garden to a community trail mapping edible plants.</p>
+        </div>
+        <div class="about-media">
+          <img src="uploads/collage figma.png" alt="Collage of everyday life on the kibbutz" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer data-screen-label="Footer">
+    <div class="wrap">
+      <p class="foot-k">Let's build something thoughtful.</p>
+      <a class="foot-mail" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">yaelkulish@gmail.com</a>
+      <div class="foot-meta">
+        <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <span>© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
