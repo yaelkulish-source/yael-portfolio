@@ -81,7 +81,7 @@
 
   /* ---------- HERO ---------- */
   .hero { padding: 92px 48px 72px; }
-  .sap-logo { height: 24px; width: auto; display: block; margin-bottom: 26px; opacity: 0.92; }
+  .sap-logo { height: 64px; width: auto; display: block; margin-bottom: 30px; opacity: 0.95; }
   .hero .label { margin-bottom: 34px; }
   h1.title {
     font-family: var(--sans); font-weight: 700;
@@ -363,7 +363,20 @@
   .foot-meta a, .foot-copy { font-size: 13px; color: var(--ink-faint); text-decoration: none; }
   .foot-meta a:hover { color: var(--ink); }
 
+  .sapphire-wrap { max-width: 1120px; margin: 0 auto; padding: 28px 48px 0; }
+  .sapphire-banner { position: relative; display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 30px 60px -40px rgba(28,40,90,0.3); }
+  .sapphire-banner img { display: block; width: 100%; height: auto; }
+  .sapphire-banner .ext-icon { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 999px; background: rgba(0,0,0,0.38); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; backdrop-filter: blur(4px); }
+  .sapphire-cap { margin-top: 12px; font-size: 13px; text-align: center; }
+  .sapphire-cap a { color: var(--ink-soft); text-decoration: none; }
+  .sapphire-cap a:hover { color: var(--sap); }
+  .fig-compact { max-width: 620px; margin: 0 auto; }
+  .fig-compact .screen { box-shadow: 0 2px 3px rgba(28,40,70,0.03), 0 20px 44px -34px rgba(28,40,90,0.24); }
+  .teaser { padding: 40px 0 8px; }
+  .teaser .fig-lead { font-size: clamp(22px,3vw,32px); text-align: center; margin-top: 24px; }
+
   @media (max-width: 860px) {
+    .sapphire-wrap { padding: 24px 24px 0; }
     .wrap { padding: 0 24px; }
     .hero { padding: 60px 24px 52px; }
     section.block { padding: 56px 0; }
@@ -388,6 +401,14 @@
     </div>
   </nav>
 
+  <div class="sapphire-wrap">
+    <a class="sapphire-banner" href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer" aria-label="Watch the SAPPHIRE Orlando keynote on YouTube">
+      <img src="assets/sapphire-orlando-banner.webp" alt="SAPPHIRE Orlando keynote banner" />
+      <span class="ext-icon">↗</span>
+    </a>
+    <p class="sapphire-cap"><a href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer">Watch the full keynote on YouTube →</a></p>
+  </div>
+
   <!-- ===================== HERO ===================== -->
   <header class="hero wrap" data-screen-label="Hero">
     <svg class="sap-logo" viewBox="0 0 412.38 204" role="img" aria-label="SAP">
@@ -403,8 +424,8 @@
       <polyline fill="url(#sapGrad)" points="0 204 208.413 204 412.38 0 0 0 0 204"></polyline>
       <path fill="#fff" d="m244.727,38.359l-40.593-.025v96.518l-35.46-96.518h-35.16l-30.277,80.716c-3.224-20.352-24.277-27.38-40.84-32.649-10.937-3.512-22.541-8.678-22.434-14.387.091-4.687,6.225-9.04,18.377-8.385,8.17.433,15.373,1.092,29.71,8.006l14.102-24.557c-13.088-6.658-31.169-10.867-45.985-10.883h-.086c-17.277,0-31.677,5.598-40.602,14.824-6.221,6.443-9.572,14.626-9.712,23.679-.227,12.454,4.341,21.292,13.938,28.338,8.104,5.944,18.468,9.794,27.603,12.626,11.27,3.492,20.467,6.526,20.36,13.002-.083,2.355-.977,4.552-2.671,6.337-2.807,2.897-7.124,3.986-13.084,4.098-11.497.243-20.026-1.559-33.61-9.585l-12.536,24.903c13.546,7.705,29.586,12.223,45.952,12.223l2.106-.024c14.247-.256,25.745-4.316,34.929-11.712.527-.416,1.001-.845,1.488-1.277l-4.073,10.874h36.875l6.189-18.822c6.477,2.214,13.847,3.437,21.676,3.437,7.618,0,14.795-1.17,21.156-3.252l5.965,18.637h60.137v-38.969h13.113c31.706,0,50.456-16.147,50.456-43.202,0-30.139-18.219-43.969-57.011-43.969Zm-93.816,82.587c-4.737,0-9.177-.828-13.006-2.275l12.866-40.593h.244l12.643,40.708c-3.801,1.349-8.138,2.16-12.746,2.16Zm96.199-23.324h-8.941v-32.711h8.941c11.927,0,21.437,3.961,21.437,16.139,0,12.602-9.51,16.572-21.437,16.572"></path>
     </svg>
-    <span class="label">Developer Experience · SAP Build · 2025</span>
-    <h1 class="title">Designing the developer experience SAP was missing.</h1>
+    <span class="label">Developer Experience · SAP Build · 2026</span>
+    <h1 class="title">Designing Vercel's power to disappear inside SAP.</h1>
     <p class="hero-sub">Two audiences. One experience. Built inside SAP.</p>
 
     <div class="meta">
@@ -448,6 +469,7 @@
         <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
         <div class="more-body">
           <p>SAP&nbsp;Build had grown into a family of tools: Build Apps, Build Process Automation, Build Work Zone. Each served a purpose. But together, they'd become hard to navigate, even for people inside SAP. Our job was to find a way through.</p>
+          <p>Mid-research, the scope expanded: the experience needed to serve business users, not just developers, and that's when the real challenge came into focus. Developers switch tools; business users abandon them.</p>
         </div>
       </details>
     </div>
@@ -500,27 +522,10 @@
     </div>
   </section>
 
-  <!-- ===================== 03 · THE SHIFT ===================== -->
-  <section class="block" data-screen-label="03 The shift">
+  <!-- ===================== 03 · THE INSIGHT ===================== -->
+  <section class="block" data-screen-label="03 The insight">
     <div class="wrap read">
-      <span class="label">03: Mid-Research · Strategic Pivot</span>
-      <h2 class="h2">Halfway through, the brief changed.</h2>
-      <p class="lead">Mid-research, SAP expanded the scope: the experience needed to serve not just developers, but business users too. That's when the real design challenge came into focus.</p>
-      <p class="statement">Developers switch tools. <span class="em">Business users abandon them.</span></p>
-      <details class="more">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>Developers are comfortable moving between IDEs, terminals, and platforms. It's part of how they work. Business users like Sarah aren't. Every additional tool is friction. Every context switch is a reason to stop.</p>
-          <p>The solution couldn't just be better tooling for developers. It had to be invisible infrastructure for everyone else.</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- ===================== 04 · THE INSIGHT ===================== -->
-  <section class="block" data-screen-label="04 The insight">
-    <div class="wrap read">
-      <span class="label">04: Design Principle · White-Label Approach</span>
+      <span class="label">03: Design Principle · White-Label Approach</span>
       <h2 class="h2">The answer wasn't another tool. It was one seamless experience.</h2>
       <p class="lead">Instead of building a new surface, we embedded the experience inside what users already trusted. A white-label approach: powerful technology, invisible seams, one familiar environment.</p>
 
@@ -550,7 +555,7 @@
             <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
             <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com / studio</span>
           </div>
-          <img class="shot crop" src="uploads/step5-prototype.png" alt="The build experience embedded inside SAP — generation and preview side by side" style="object-position: center;" />
+          <img class="shot crop" src="uploads/Agent -_ Joule Chat.png" alt="The build experience embedded inside SAP — generation and preview side by side" style="object-position: center;" />
         </div>
         <figcaption class="fig-cap">
           <div class="fig-cap-body">
@@ -563,11 +568,11 @@
     </div>
   </section>
 
-  <!-- ===================== 05 · THE CHOICE ===================== -->
-  <section class="block" data-screen-label="05 The choice">
+  <!-- ===================== 04 · THE CHOICE ===================== -->
+  <section class="block" data-screen-label="04 The choice">
     <div class="wrap">
       <div class="read">
-        <span class="label">05: Two Concepts · Design Decision</span>
+        <span class="label">04: Two Concepts · Design Decision</span>
         <h2 class="h2">Two concepts. One kept users where they belonged.</h2>
         <p class="lead">We explored two directions. Both worked technically. Only one felt right for the user.</p>
       </div>
@@ -614,10 +619,10 @@
     </div>
   </section>
 
-  <!-- ===================== 06 · THE DECISION ===================== -->
-  <section class="block" data-screen-label="06 The decision">
+  <!-- ===================== 05 · THE DECISION ===================== -->
+  <section class="block" data-screen-label="05 The decision">
     <div class="wrap read">
-      <span class="label">06: Business Impact · Deploy to BTP</span>
+      <span class="label">05: Business Impact · Deploy to BTP</span>
       <h2 class="h2">One button, in the right place, made the business goal reachable.</h2>
       <p class="lead">Through synthesis of our interviews, I proposed <strong>Deploy to BTP</strong>: a single action that takes a business user from "I built something" to "it's live," without ever needing to understand the infrastructure behind it. It became the project's most critical business decision.</p>
       <details class="more">
@@ -651,10 +656,10 @@
     </div>
   </section>
 
-  <!-- ===================== 07 · THE RESULT ===================== -->
-  <section class="block" data-screen-label="07 The result">
+  <!-- ===================== 06 · THE RESULT ===================== -->
+  <section class="block" data-screen-label="06 The result">
     <div class="wrap read">
-      <span class="label">07: Impact · Reflection</span>
+      <span class="label">06: Impact · Reflection</span>
       <h2 class="h2">The work found its way forward.</h2>
       <p class="lead">The solution was presented at an internal workshop in Germany, and received with enthusiasm. Working closely with a PM and engineering lead, we proposed a direction: embedded, seamless, deployment-first, in collaboration with Vercel. Shortly after, SAP launched a platform moving in exactly this direction at Sapphire.</p>
       <ul class="impact">
@@ -675,6 +680,7 @@
     <div class="wrap figwide">
       <figure class="fig">
         <div class="fig-title">The payoff</div>
+        <p class="fig-note" style="margin-bottom:10px;">AI-generated prototype, shown for illustrative purposes.</p>
         <div class="screen">
           <div class="screen-bar">
             <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
@@ -685,8 +691,6 @@
         <figcaption class="fig-cap">
           <div class="fig-cap-body">
             <div class="fig-lead">"A sentence became a live agent, running, in production, inside SAP."</div>
-            <p>The deployment-first direction in motion: a plain-language request, built and shipped, now monitoring in real time: the shape of the platform vision that surfaced at Sapphire.</p>
-            <p class="fig-note">AI-generated prototype, shown for illustrative purposes.</p>
           </div>
         </figcaption>
       </figure>
