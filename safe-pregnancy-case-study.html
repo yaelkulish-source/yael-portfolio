@@ -344,36 +344,42 @@
   .closing { padding: 96px 0 24px; }
   .closing .namaste { font-weight: 700; font-size: clamp(26px, 3.6vw, 42px); letter-spacing: -0.02em; color: var(--ink); text-wrap: balance; max-width: 22ch; }
   .closing .sub { font-size: 15.5px; color: var(--ink-soft); margin-top: 18px; max-width: 52ch; line-height: 1.6; }
-  .nextcase { margin: 60px 0 0; border-top: 1px solid var(--line); padding-top: 46px;
-    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .nx-k { font-size: 10.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 11px; }
-  .nx-t { font-weight: 700; font-size: clamp(22px, 3vw, 34px); color: var(--ink); letter-spacing: -0.02em; }
-  a.nx-link {
-    display: inline-flex; align-items: center; gap: 9px; white-space: nowrap;
-    font-size: 14px; font-weight: 600; color: var(--paper);
-    background: var(--ink); text-decoration: none; padding: 14px 26px; border-radius: 999px;
-    transition: transform 0.18s ease, opacity 0.18s ease;
+  .banner-stack { margin: 60px 0 0; }
+  .band {
+    display: block; width: 100vw; margin-left: calc(50% - 50vw);
+    background: color-mix(in oklch, var(--paper) 90%, var(--ink) 10%);
   }
-  a.nx-link:hover { transform: translateY(-2px); opacity: 0.92; }
+  .band-inner { max-width: var(--maxw); margin: 0 auto; padding: 30px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .band-inner a { font-size: 14.5px; font-weight: 600; color: var(--ink); text-decoration: none; transition: opacity 0.18s ease; }
+  .band-inner a:hover { opacity: 0.7; }
+  .contact-cta { max-width: var(--maxw); margin: 0 auto; padding: 72px 48px; text-align: center; }
+  .cta-label { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 16px; }
+  .cta-link { display: inline-block; font-weight: 700; font-size: clamp(32px, 5.2vw, 56px); color: var(--acc); text-decoration: none; letter-spacing: -0.02em; transition: opacity 0.18s ease; }
+  .cta-link:hover { opacity: 0.75; }
 
-  footer { padding: 56px 0 72px; }
-  .foot-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .foot-meta { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer { padding: 44px 0 64px; border-top: 1px solid var(--line); }
+  .foot-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .foot-meta { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
   .foot-meta a, .foot-copy { font-size: 13px; color: var(--ink-faint); text-decoration: none; }
   .foot-meta a:hover { color: var(--ink); }
+  @media (max-width: 640px) { .closing-nav { grid-template-columns: 1fr; text-align: center; gap: 12px; } .cn-prev, .cn-next, .cn-top { justify-self: center; } }
 
   @media (max-width: 860px) {
     .wrap { padding: 0 24px; }
     .hero { padding: 60px 24px 48px; }
     .hero-grid { grid-template-columns: 1fr; gap: 40px; }
     section.block { padding: 56px 0; }
+    .band-inner { padding: 24px; flex-wrap: wrap; gap: 12px; }
+    .contact-cta { padding: 56px 24px; }
     section.quoteband { padding: 64px 0; }
     .meta, .cards, .cards.two, .numbers { grid-template-columns: 1fr; gap: 26px; }
     .split, .walk, .walk.flip { grid-template-columns: 1fr; gap: 36px; }
     .walk-visual.right { padding-right: 0; justify-content: center; }
     .split-visual { position: static; }
     .nav-right { display: none; }
-    .nextcase { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 860px) {
+    .contact-cta { padding: 56px 24px; }
   }
 </style>
 </head>
@@ -383,7 +389,7 @@
     <div class="wrap nav-inner">
       <a class="nav-back" href="index.html">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 3L4 7L8.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to work
+        All projects
       </a>
       <div class="nav-right">
         <a class="nav-link" href="about.html">About</a>
@@ -621,18 +627,17 @@
   <section class="wrap closing" data-screen-label="Closing">
     <p class="namaste">Care that's there before the question, not weeks after.</p>
     <p class="sub">Safe Pregnancy reframed high-risk monitoring around the gaps between visits, where the anxiety actually lives.</p>
-    <div class="nextcase">
-      <div>
-        <div class="nx-k">That's the full picture</div>
-        <div class="nx-t">Three projects. One way of thinking about problems.</div>
+    <div class="banner-stack">
+      <div class="band">
+        <div class="band-inner">
+          <a href="we-bubbles-case-study.html">← Previous project</a>
+          <a href="index.html#work">All projects →</a>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:26px;">
-        <a class="nx-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">
-          Let's talk
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a style="font-size:13px;font-weight:600;color:var(--ink-faint);text-decoration:none;" href="index.html#work">All projects</a>
-      </div>
+    </div>
+    <div class="contact-cta">
+      <span class="cta-label">Get in touch</span>
+      <a class="cta-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">Let's talk →</a>
     </div>
   </section>
 
