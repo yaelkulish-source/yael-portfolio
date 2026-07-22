@@ -343,33 +343,33 @@
   }
   .closing .sub { font-size: 15.5px; color: var(--ink-soft); margin-top: 18px; max-width: 50ch; line-height: 1.6; }
 
-  .nextcase {
-    margin: 64px 0 0; border-top: 1px solid var(--line); padding-top: 48px;
-    display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  .banner-stack { margin-top: 64px; }
+  .band {
+    display: block; width: 100vw; margin-left: calc(50% - 50vw);
+    background: color-mix(in oklch, var(--paper) 90%, var(--ink) 10%);
   }
-  .nx-k { font-size: 10.5px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 11px; }
-  .nx-t { font-family: var(--serif); font-weight: 600; font-size: clamp(22px, 3vw, 34px); color: var(--ink); }
-  a.nx-link {
-    display: inline-flex; align-items: center; gap: 9px; white-space: nowrap;
-    font-size: 14px; font-weight: 600; color: var(--paper);
-    background: var(--ink); text-decoration: none; padding: 14px 26px; border-radius: 999px;
-    transition: transform 0.18s ease, opacity 0.18s ease;
-  }
-  a.nx-link:hover { transform: translateY(-2px); opacity: 0.92; }
+  .band-inner { max-width: var(--maxw); margin: 0 auto; padding: 30px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .band-inner a { font-size: 14.5px; font-weight: 600; color: var(--ink); text-decoration: none; transition: opacity 0.18s ease; }
+  .band-inner a:hover { opacity: 0.7; }
+  .contact-cta { max-width: var(--maxw); margin: 0 auto; padding: 72px 48px; text-align: center; }
+  .cta-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 16px; }
+  .cta-link { display: inline-block; font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5.2vw, 56px); color: var(--sap); text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.18s ease; }
+  .cta-link:hover { opacity: 0.75; }
 
-  footer { padding: 56px 0 72px; }
-  .foot-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .foot-meta { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer { padding: 44px 0 64px; border-top: 1px solid var(--line); }
+  .foot-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+  .foot-meta { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
   .foot-meta a, .foot-copy { font-size: 13px; color: var(--ink-faint); text-decoration: none; }
   .foot-meta a:hover { color: var(--ink); }
+  @media (max-width: 640px) { .closing-nav { grid-template-columns: 1fr; text-align: center; gap: 12px; } .cn-prev, .cn-next, .cn-top { justify-self: center; } }
 
   .sapphire-wrap { max-width: 1120px; margin: 0 auto; padding: 28px 48px 0; }
   .sapphire-banner { position: relative; display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 30px 60px -40px rgba(28,40,90,0.3); }
   .sapphire-banner img { display: block; width: 100%; height: auto; }
   .sapphire-banner .ext-icon { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 999px; background: rgba(0,0,0,0.38); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; backdrop-filter: blur(4px); }
-  .sapphire-cap { margin-top: 12px; font-size: 13px; text-align: center; }
-  .sapphire-cap a { color: var(--ink-soft); text-decoration: none; }
-  .sapphire-cap a:hover { color: var(--sap); }
+  .sapphire-cap { margin-top: 14px; font-size: 15.5px; color: var(--ink-soft); text-align: center; line-height: 1.6; }
+  .sapphire-cap a { color: var(--sap); text-decoration: underline; text-underline-offset: 3px; }
+  .sapphire-cap a:hover { color: var(--sap-deep); }
   .fig-compact { max-width: 620px; margin: 0 auto; }
   .fig-compact .screen { box-shadow: 0 2px 3px rgba(28,40,70,0.03), 0 20px 44px -34px rgba(28,40,90,0.24); }
   .teaser { padding: 40px 0 8px; }
@@ -381,9 +381,13 @@
     .hero { padding: 60px 24px 52px; }
     section.block { padding: 56px 0; }
     .meta { grid-template-columns: 1fr; gap: 26px; }
+    .band-inner { padding: 24px; flex-wrap: wrap; gap: 12px; }
+    .contact-cta { padding: 56px 24px; }
     .compare { grid-template-columns: 1fr; gap: 32px; }
     .nav-right { display: none; }
-    .nextcase { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 860px) {
+    .contact-cta { padding: 56px 24px; }
   }
 </style>
 </head>
@@ -393,7 +397,7 @@
     <div class="wrap nav-inner">
       <a class="nav-back" href="index.html">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M8.5 3L4 7L8.5 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Back to work
+        All projects
       </a>
       <div class="nav-right">
         <a class="nav-link" href="about.html">About</a>
@@ -406,7 +410,7 @@
       <img src="assets/sapphire-orlando-banner.webp" alt="SAPPHIRE Orlando keynote banner" />
       <span class="ext-icon">↗</span>
     </a>
-    <p class="sapphire-cap"><a href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer">Watch the full keynote on YouTube →</a></p>
+    <p class="sapphire-cap">Presented live at SAP Sapphire Orlando 2026 — <a href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer">Watch the full keynote →</a></p>
   </div>
 
   <!-- ===================== HERO ===================== -->
@@ -702,28 +706,27 @@
     <p class="namaste">A research insight and a business goal turned out to be the same decision.</p>
     <p class="sub">The work proposed a direction SAP went on to pursue: embedded, seamless, deployment-first.</p>
 
-    <div class="nextcase">
-      <div>
-        <div class="nx-k">Next</div>
-        <div class="nx-t">WE Bubbles</div>
+    <div class="banner-stack">
+      <div class="band">
+        <div class="band-inner">
+          <a href="index.html#work">← All projects</a>
+          <a href="we-bubbles-case-study.html">Next project →</a>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:26px;">
-        <a class="nx-link" href="we-bubbles-case-study.html">
-          Next project
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11L11 3M11 3H5M11 3V9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a style="font-size:13.5px;font-weight:600;color:var(--ink-faint);text-decoration:none;" href="index.html#work">All projects</a>
-      </div>
+    </div>
+    <div class="contact-cta">
+      <span class="cta-label">Get in touch</span>
+      <a class="cta-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">Let's talk →</a>
     </div>
   </section>
 
   <footer>
     <div class="wrap foot-inner">
-      <span class="foot-copy">© 2026, Portfolio</span>
       <div class="foot-meta">
-        <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
+        <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
+      <span class="foot-copy">© 2026, Portfolio</span>
     </div>
   </footer>
 
