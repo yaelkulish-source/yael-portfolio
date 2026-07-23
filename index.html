@@ -77,7 +77,7 @@
   }
 
   /* ---------- HERO ---------- */
-  .hero { padding: 80px 0 96px; }
+  .hero { padding-top: 80px; padding-bottom: 96px; }
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -330,7 +330,7 @@
   /* Phone + laptop duo */
   .device-duo { display: flex; align-items: flex-end; justify-content: center; }
   .pd-phone {
-    flex: none; width: 186px; aspect-ratio: 9 / 20;
+    flex: none; width: 186px; max-width: 100%; aspect-ratio: 9 / 20;
     border-radius: 12px; overflow: hidden;
     position: relative; z-index: 2;
     margin-right: -30px; margin-bottom: 30px;
@@ -388,12 +388,12 @@
   }
   @media (max-width: 820px) {
     .wrap { padding: 0 24px; }
-    .hero { padding: 56px 0 64px; }
+    .hero { padding-top: 56px; padding-bottom: 64px; }
     .project { padding: 72px 0; }
-    .project-grid { grid-template-columns: 1fr; gap: 44px; }
+    .project-grid { grid-template-columns: minmax(0, 1fr); gap: 44px; }
     .phone { width: 158px; }
-    .pd-phone { width: 150px; margin-right: -22px; margin-bottom: 22px; }
-    .pd-laptop { width: 360px; }
+    .pd-phone { width: clamp(95px, 19vw, 150px); margin-right: -16px; margin-bottom: 22px; }
+    .pd-laptop { width: clamp(220px, 44vw, 360px); }
   }
 </style>
 </head>
