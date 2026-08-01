@@ -337,34 +337,33 @@
     display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; margin-top: 1px;
   }
 
-  /* ---------- CLOSING / NEXT ---------- */
-  .closing { padding: 96px 0 24px; }
-  .closing .namaste {
-    font-family: var(--serif); font-weight: 600;
-    font-size: clamp(26px, 3.6vw, 42px); letter-spacing: -0.012em;
-    color: var(--ink); text-wrap: balance; max-width: 20ch;
+  /* ---------- CASE CLOSING ---------- */
+  .case-closing {
+    margin-top: 96px;
+    padding: 96px 48px 56px;
+    background:
+      radial-gradient(ellipse 60% 55% at 12% 15%, color-mix(in srgb, #0070C0 20%, transparent), transparent 72%),
+      radial-gradient(ellipse 55% 60% at 88% 20%, color-mix(in srgb, #1FA090 18%, transparent), transparent 72%),
+      radial-gradient(ellipse 70% 65% at 50% 105%, color-mix(in srgb, #9E6060 16%, transparent), transparent 72%),
+      var(--paper);
   }
-  .closing .sub { font-size: 15.5px; color: var(--ink-soft); margin-top: 18px; max-width: 50ch; line-height: 1.6; }
-
-  .banner-stack { margin-top: 64px; }
-  .band {
-    display: block; width: 100vw; margin-left: calc(50% - 50vw);
-    background: color-mix(in oklch, var(--paper) 90%, var(--ink) 10%);
+  .cc-nav {
+    max-width: var(--maxw); margin: 0 auto;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap;
   }
-  .band-inner { max-width: var(--maxw); margin: 0 auto; padding: 30px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-  .band-inner a { font-size: 14.5px; font-weight: 600; color: var(--ink); text-decoration: none; transition: opacity 0.18s ease; }
-  .band-inner a:hover { opacity: 0.7; }
-  .contact-cta { max-width: var(--maxw); margin: 0 auto; padding: 72px 48px; text-align: center; }
-  .cta-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 16px; }
-  .cta-link { display: inline-block; font-family: var(--serif); font-weight: 600; font-size: clamp(32px, 5.2vw, 56px); color: var(--sap); text-decoration: none; letter-spacing: -0.01em; transition: opacity 0.18s ease; }
-  .cta-link:hover { opacity: 0.75; }
-
-  footer { padding: 44px 0 64px; border-top: 1px solid var(--line); }
-  .foot-inner { display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
-  .foot-meta { display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; }
-  .foot-meta a, .foot-copy { font-size: 13px; color: var(--ink-faint); text-decoration: none; }
-  .foot-meta a:hover { color: var(--ink); }
-  @media (max-width: 640px) { .closing-nav { grid-template-columns: 1fr; text-align: center; gap: 12px; } .cn-prev, .cn-next, .cn-top { justify-self: center; } }
+  .cc-link { text-decoration: none; display: inline-flex; flex-direction: column; gap: 10px; }
+  .cc-next { text-align: right; align-items: flex-end; margin-left: auto; }
+  .cc-label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); }
+  .cc-dest { font-size: clamp(22px, 3.6vw, 36px); font-weight: 700; letter-spacing: -0.01em; color: var(--ink); transition: opacity 0.18s ease; }
+  .cc-link:hover .cc-dest { opacity: 0.65; }
+  .cc-contact {
+    max-width: var(--maxw); margin: 56px auto 0; padding-top: 30px;
+    border-top: 1px solid var(--line);
+    text-align: center; font-size: 14px; font-weight: 500; color: var(--ink-faint);
+  }
+  .cc-contact a { color: var(--ink-faint); text-decoration: none; }
+  .cc-contact a:hover { color: var(--ink); }
+  .cc-dot { margin: 0 10px; opacity: 0.5; }
 
   .sapphire-wrap { max-width: 1120px; margin: 0 auto; padding: 28px 48px 0; }
   .sapphire-banner { position: relative; display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 30px 60px -40px rgba(28,40,90,0.3); }
@@ -384,13 +383,11 @@
     .hero { padding: 60px 24px 52px; }
     section.block { padding: 56px 0; }
     .meta { grid-template-columns: 1fr; gap: 26px; }
-    .band-inner { padding: 24px; flex-wrap: wrap; gap: 12px; }
-    .contact-cta { padding: 56px 24px; }
     .compare { grid-template-columns: 1fr; gap: 32px; }
     .nav-right { display: none; }
-  }
-  @media (max-width: 860px) {
-    .contact-cta { padding: 56px 24px; }
+    .case-closing { padding: 64px 24px 44px; }
+    .cc-nav { flex-direction: column; gap: 32px; }
+    .cc-next { text-align: left; align-items: flex-start; margin-left: 0; }
   }
 </style>
 </head>
@@ -404,6 +401,7 @@
       </a>
       <div class="nav-right">
         <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="#contact">Contact</a>
       </div>
     </div>
   </nav>
@@ -705,33 +703,23 @@
   </section>
 
   <!-- ===================== CLOSING ===================== -->
-  <section class="wrap closing" data-screen-label="Closing">
-    <p class="namaste">A research insight and a business goal turned out to be the same decision.</p>
-    <p class="sub">The work proposed a direction SAP went on to pursue: embedded, seamless, deployment-first.</p>
-
-    <div class="banner-stack">
-      <div class="band">
-        <div class="band-inner">
-          <a href="index.html#work">← All projects</a>
-          <a href="we-bubbles-case-study.html">Next project →</a>
-        </div>
-      </div>
+  <section class="case-closing" id="contact" data-screen-label="Closing">
+    <div class="cc-nav">
+      <a class="cc-link cc-prev" href="index.html#work">
+        <span class="cc-label">Previous project</span>
+        <span class="cc-dest">← All Projects</span>
+      </a>
+      <a class="cc-link cc-next" href="we-bubbles-case-study.html">
+        <span class="cc-label">Next project</span>
+        <span class="cc-dest">WE Bubbles →</span>
+      </a>
     </div>
-    <div class="contact-cta">
-      <span class="cta-label">Get in touch</span>
-      <a class="cta-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">Let's talk →</a>
+    <div class="cc-contact">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">yaelkulish@gmail.com</a>
+      <span class="cc-dot">·</span>
+      <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </section>
-
-  <footer>
-    <div class="wrap foot-inner">
-      <div class="foot-meta">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=yaelkulish@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
-        <a href="https://www.linkedin.com/in/yael-kulish/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      </div>
-      <span class="foot-copy">© 2026, Portfolio</span>
-    </div>
-  </footer>
 
   <script>
     const nav = document.getElementById('nav');
