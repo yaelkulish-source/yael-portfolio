@@ -194,21 +194,16 @@
   image-slot { display: block; width: 100%; }
   .fig-cap { margin-top: 18px; }
 
-  /* ---------- VIDEO PREVIEW: bubble-rising overlay ---------- */
+  /* ---------- VIDEO PREVIEW: bubble-rising loop overlay ---------- */
   .video-preview { position: relative; }
   .bubble-overlay {
     position: absolute; inset: 0; overflow: hidden;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; background: rgba(20, 40, 36, 0.08);
   }
-  .bubble-overlay .bubble {
-    position: absolute; border-radius: 50%; pointer-events: none;
-    animation: bbl-rise linear infinite;
-  }
-  .bubble-overlay .bubble::after {
-    content: ""; position: absolute; top: 18%; left: 20%; width: 26%; height: 26%;
-    border-radius: 50%; background: rgba(255,255,255,0.85);
-    animation: bbl-shine 2.2s ease-in-out infinite;
+  .bubble-loop {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; pointer-events: none;
   }
   .bubble-play-btn {
     position: relative; z-index: 2;
@@ -218,15 +213,6 @@
     color: #fff; cursor: pointer; transition: transform 0.18s ease, background 0.18s ease;
   }
   .bubble-overlay:hover .bubble-play-btn { transform: scale(1.08); background: rgba(20,20,18,0.72); }
-  @keyframes bbl-rise {
-    0%   { transform: translateY(0) scale(1); opacity: 0.88; }
-    75%  { opacity: 0.55; }
-    100% { transform: translateY(-480px) scale(1.4); opacity: 0; }
-  }
-  @keyframes bbl-shine { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
-  @media (prefers-reduced-motion: reduce) {
-    .bubble-overlay .bubble { display: none; }
-  }
   .fig-title { font-size: 12px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink-faint); margin-bottom: 14px; text-align: left; }
   .fig-lead { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: 18px; line-height: 1.45; color: var(--ink-soft); text-wrap: balance; }
 
@@ -452,6 +438,7 @@
           <div class="video-preview">
             <video id="createBubbleVideo" src="uploads/Create_bubble_flow1_hq.mp4" poster="uploads/Create_bubble_poster.png" playsinline preload="metadata" style="display: block; width: 100%; height: auto;"></video>
             <div class="bubble-overlay" id="bubbleOverlay" role="button" tabindex="0" aria-label="Play the Create Bubble flow video">
+              <video class="bubble-loop" id="bubbleLoop" src="uploads/create-bubble-preview-loop.mp4" poster="uploads/create-bubble-preview-poster.png" muted loop playsinline preload="auto"></video>
               <button class="bubble-play-btn" type="button" tabindex="-1" aria-hidden="true">
                 <svg width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M2 1.5 18 11 2 20.5V1.5Z" fill="currentColor"/></svg>
               </button>
@@ -509,25 +496,14 @@
     onScroll();
 
     const bubbleOverlay = document.getElementById('bubbleOverlay');
+    const bubbleLoop = document.getElementById('bubbleLoop');
     const createBubbleVideo = document.getElementById('createBubbleVideo');
-    if (bubbleOverlay && createBubbleVideo) {
+    if (bubbleOverlay && bubbleLoop && createBubbleVideo) {
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const playBtn = bubbleOverlay.querySelector('.bubble-play-btn');
-        for (let i = 0; i < 16; i++) {
-          const size = 8 + ((i * 3.4) % 26);
-          const bubble = document.createElement('div');
-          bubble.className = 'bubble';
-          bubble.style.left = `${(i * 6.25) % 100}%`;
-          bubble.style.bottom = `${-10 + ((i * 8.7) % 28)}%`;
-          bubble.style.width = `${size}px`;
-          bubble.style.height = `${size}px`;
-          const hue = 160 + ((i * 6) % 36);
-          bubble.style.background = `radial-gradient(circle at 32% 28%, hsla(${hue},52%,94%,0.92), hsla(${hue},82%,62%,0.48) 56%, transparent)`;
-          bubble.style.border = `1px solid hsla(${hue + 18},100%,62%,0.58)`;
-          bubble.style.animationDuration = `${1.8 + ((i * 0.19) % 1.6)}s`;
-          bubble.style.animationDelay = `${(i * 0.11) % 1.0}s`;
-          bubbleOverlay.insertBefore(bubble, playBtn);
-        }
+        const tryPlay = () => bubbleLoop.play().catch(() => {});
+        tryPlay();
+        bubbleLoop.addEventListener('canplay', tryPlay);
+        bubbleLoop.addEventListener('loadeddata', tryPlay);
       }
 
       const activateVideo = () => {
