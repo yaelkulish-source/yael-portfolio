@@ -113,6 +113,45 @@
     background: none;
   }
 
+  /* ---------- PHOTO COLLAGE + TOOLTIPS ---------- */
+  .collage { position: relative; width: 100%; aspect-ratio: 3798 / 3374; }
+  .collage-item { position: absolute; margin: 0; cursor: default; outline: none; }
+  .about-section.reverse .about-media .collage-item img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    border: none; box-shadow: none; background: none;
+  }
+  .collage-item .tip {
+    position: absolute; bottom: calc(100% + 10px); left: 50%;
+    width: max-content; max-width: 210px;
+    padding: 8px 12px; border-radius: 8px;
+    background: var(--ink); color: var(--paper);
+    font-size: 13px; font-weight: 500; line-height: 1.35; text-align: left;
+    box-shadow: 0 8px 24px -8px rgba(30,25,20,0.4);
+    opacity: 0; pointer-events: none;
+    transform: translate(-50%, 4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 10;
+  }
+  .collage-item .tip::after {
+    content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px;
+    border: 5px solid transparent; border-top-color: var(--ink);
+  }
+  .collage-item[data-tip-align="left"] .tip { left: 0; transform: translate(0, 4px); }
+  .collage-item[data-tip-align="left"] .tip::after { left: 20px; margin-left: 0; }
+  .collage-item[data-tip-align="right"] .tip { left: auto; right: 0; transform: translate(0, 4px); }
+  .collage-item[data-tip-align="right"] .tip::after { left: auto; right: 20px; margin-left: 0; }
+  .collage-item:focus-visible { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--acc); }
+  .collage-item:focus-visible, .collage-item.is-open { z-index: 5; }
+  .collage-item:focus-visible .tip, .collage-item.is-open .tip { opacity: 1; transform: translate(-50%, 0); }
+  .collage-item[data-tip-align]:focus-visible .tip,
+  .collage-item[data-tip-align].is-open .tip { transform: translate(0, 0); }
+  @media (max-width: 480px) { .collage-item .tip { max-width: 170px; } }
+  @media (hover: hover) {
+    .collage-item:hover { z-index: 5; }
+    .collage-item:hover .tip { opacity: 1; transform: translate(-50%, 0); }
+    .collage-item[data-tip-align]:hover .tip { transform: translate(0, 0); }
+  }
+
   h2.section-title {
     font-family: var(--serif);
     font-weight: 700;
@@ -202,7 +241,44 @@
           <p>I live on a kibbutz, where I help run the community's cultural life and a schnitzel stand I built a small ordering system for. I garden, practice yoga daily, and spend time on hands-on projects, from an organic winter garden to a community trail mapping edible plants.</p>
         </div>
         <div class="about-media">
-          <img src="uploads/collage figma.png" alt="Collage of everyday life on the kibbutz" />
+          <div class="collage" role="group" aria-label="Collage of everyday life on the kibbutz">
+            <figure class="collage-item" tabindex="0" style="left:44.128%;top:0%;width:36.440%;height:30.765%">
+              <img src="uploads/about/yoga-lunge.webp" alt="Yoga lunge on a wooden deck overlooking the sea and pine trees" loading="lazy" decoding="async" />
+              <figcaption class="tip">I practice yoga every day</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" style="left:23.170%;top:9.010%;width:18.536%;height:21.755%">
+              <img src="uploads/about/edible-flowers.webp" alt="Edible flowers arranged in a pattern on a white plate" loading="lazy" decoding="async" />
+              <figcaption class="tip">Healthy food and aesthetics: two things I love</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" data-tip-align="right" style="left:82.991%;top:11.144%;width:17.009%;height:19.621%">
+              <img src="uploads/about/strawberry-bowl.webp" alt="Green smoothie bowl topped with strawberries and a swirl" loading="lazy" decoding="async" />
+              <figcaption class="tip">I love healthy food that looks as good as it tastes</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" data-tip-align="left" style="left:0%;top:25.015%;width:20.748%;height:21.755%">
+              <img src="uploads/about/chia-pomegranate-bowl.webp" alt="Smoothie bowl topped with chia seeds and pomegranate" loading="lazy" decoding="async" />
+              <figcaption class="tip">Eating well, with an eye for aesthetics</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" style="left:23.170%;top:33.314%;width:43.971%;height:37.107%">
+              <img src="uploads/about/garden.webp" alt="Raised organic garden beds with a wooden trellis" loading="lazy" decoding="async" />
+              <figcaption class="tip">I've created organic gardens using the NO DIG method</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" data-tip-align="right" style="left:69.563%;top:33.314%;width:28.805%;height:50.504%">
+              <img src="uploads/about/yoga-headstand.webp" alt="Headstand on a blue yoga mat outdoors" loading="lazy" decoding="async" />
+              <figcaption class="tip">Yoga is part of my every day, headstands included</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" data-tip-align="left" style="left:10.427%;top:49.318%;width:10.321%;height:21.103%">
+              <img src="uploads/about/wisteria-drawing.webp" alt="Botanical drawing of wisteria next to coloured pencils" loading="lazy" decoding="async" />
+              <figcaption class="tip">I love to draw</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" data-tip-align="left" style="left:16.061%;top:72.970%;width:15.087%;height:17.813%">
+              <img src="uploads/about/veggie-platter.webp" alt="Platter of cut vegetables around a bowl of dip" loading="lazy" decoding="async" />
+              <figcaption class="tip">I love making healthy food look beautiful</figcaption>
+            </figure>
+            <figure class="collage-item" tabindex="0" style="left:33.597%;top:72.970%;width:33.544%;height:27.030%">
+              <img src="uploads/about/bread-and-dips.webp" alt="Tray with seeded bread, spreads and a grain salad" loading="lazy" decoding="async" />
+              <figcaption class="tip">Healthy food, plated with care</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -219,6 +295,21 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    const collageItems = document.querySelectorAll('.collage-item');
+    const closeTips = (except) => collageItems.forEach(el => { if (el !== except) el.classList.remove('is-open'); });
+    collageItems.forEach(el => {
+      el.addEventListener('click', (e) => {
+        if (!window.matchMedia('(hover: none)').matches) return;
+        e.stopPropagation();
+        closeTips(el);
+        el.classList.toggle('is-open');
+      });
+    });
+    document.addEventListener('click', () => closeTips(null));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTips(null); });
+  </script>
 
 </body>
 </html>
