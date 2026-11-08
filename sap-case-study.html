@@ -135,6 +135,10 @@
     margin-top: 24px; max-width: 62ch; text-wrap: pretty;
   }
   .lead strong { color: var(--ink); font-weight: 600; }
+  ol.lead { padding-left: 1.5em; }
+  ol.lead li { padding-left: 0.25em; }
+  ol.lead li + li { margin-top: 16px; }
+  ol.lead li::marker { color: var(--sap); font-weight: 600; }
 
   /* ---------- VIDEO ---------- */
   figure.video { margin: 34px 0 0; max-width: 100%; }
@@ -151,6 +155,14 @@
     font-size: 13px; font-style: italic; color: #6A6A60;
     margin-top: 14px; line-height: 1.5; text-wrap: pretty;
   }
+  .video-play {
+    position: absolute; inset: 0; margin: auto; width: 72px; height: 72px;
+    border: 0; border-radius: 999px; background: var(--sap); color: #fff;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: background 0.18s ease;
+  }
+  .video-play:hover { background: var(--sap-deep); }
+  .video-play svg { margin-left: 4px; }
 
   /* ---------- COLLAPSE / READ MORE ---------- */
   details.more { margin-top: 26px; max-width: 62ch; }
@@ -372,6 +384,9 @@
   .sapphire-cap { margin-top: 14px; font-size: 15.5px; color: var(--ink-soft); text-align: center; line-height: 1.6; }
   .sapphire-cap a { color: var(--sap); text-decoration: underline; text-underline-offset: 3px; }
   .sapphire-cap a:hover { color: var(--sap-deep); }
+  .sapphire-cap a.secondary { color: var(--ink-soft); }
+  .sapphire-cap a.secondary:hover { color: var(--ink); }
+  .sapphire-wrap .label { margin-bottom: 22px; }
   .fig-compact { max-width: 620px; margin: 0 auto; }
   .fig-compact .screen { box-shadow: 0 2px 3px rgba(28,40,70,0.03), 0 20px 44px -34px rgba(28,40,90,0.24); }
   .teaser { padding: 40px 0 8px; }
@@ -406,11 +421,13 @@
   </nav>
 
   <div class="sapphire-wrap">
-    <a class="sapphire-banner" href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer" aria-label="Watch the SAPPHIRE Orlando keynote on YouTube">
-      <img src="assets/sapphire-orlando-banner.webp" alt="SAPPHIRE Orlando keynote banner" />
+    <span class="label">Where this work landed</span>
+    <a class="sapphire-banner" href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer" aria-label="SAP Sapphire Orlando 2026 conference banner">
+      <img src="assets/sapphire-orlando-banner.webp" alt="SAP Sapphire Orlando 2026 conference banner" />
       <span class="ext-icon">↗</span>
     </a>
-    <p class="sapphire-cap">Presented live at SAP Sapphire Orlando 2026 — <a href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer">Watch the full keynote →</a></p>
+    <p class="sapphire-cap">SAP Sapphire is SAP's flagship annual conference. At Sapphire Orlando 2026, SAP announced Joule Studio with Vercel embedded inside it — the direction this project explored.</p>
+    <p class="sapphire-cap"><a href="https://news.sap.com/2026/05/new-joule-studio-enterprise-scale-agentic-development/" target="_blank" rel="noopener noreferrer">Read SAP's announcement →</a> · <a class="secondary" href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer">Watch the keynote</a></p>
   </div>
 
   <!-- ===================== HERO ===================== -->
@@ -466,9 +483,13 @@
   <!-- ===================== 01 · THE MISSION ===================== -->
   <section class="block" data-screen-label="01 The mission">
     <div class="wrap read">
-      <span class="label">01: The Mission</span>
-      <h2 class="h2">Define. Visualize. Don't add complexity.</h2>
-      <p class="lead">Define and visualize an end-to-end developer experience for CAP application and agent development across VS&nbsp;Code, Cursor, and Windsurf, complementing the SAP&nbsp;Build vision. <strong>Complement SAP&nbsp;Build. Don't add complexity.</strong></p>
+      <span class="label">01: Objectives</span>
+      <h2 class="h2">Make SAP's build journey make sense again.</h2>
+      <ol class="lead">
+        <li>Map the end-to-end developer journey across VS&nbsp;Code, Cursor and Windsurf.</li>
+        <li>Cut the cognitive load of switching between SAP's many "Build" tools.</li>
+        <li>Complement SAP&nbsp;Build — without adding another surface.</li>
+      </ol>
       <details class="more">
         <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
         <div class="more-body">
@@ -535,9 +556,12 @@
 
       <figure class="video">
         <div class="video-embed">
-          <video class="lazy-video" src="uploads/sap-concept-v2.mp4" preload="none" muted loop playsinline controls></video>
+          <video id="conceptVideo" src="uploads/sap-concept-v2.mp4" poster="uploads/sap-concept-poster.jpg" preload="metadata" playsinline controls></video>
+          <button class="video-play" id="conceptPlay" type="button" aria-label="Play video with sound">
+            <svg width="22" height="24" viewBox="0 0 22 24" fill="none" aria-hidden="true"><path d="M2 2.2 20 12 2 21.8V2.2Z" fill="currentColor"/></svg>
+          </button>
         </div>
-        <figcaption class="video-cap">This is what Deploy to BTP looks like for someone who's never deployed anything.</figcaption>
+        <figcaption class="video-cap">Sarah has an idea, not a dev team. Watch what happens next.</figcaption>
       </figure>
 
       <details class="more">
@@ -725,6 +749,19 @@
     const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // Concept video has narration: start with sound only on an explicit click.
+    const conceptVideo = document.getElementById('conceptVideo');
+    const conceptPlay = document.getElementById('conceptPlay');
+    if (conceptVideo && conceptPlay) {
+      conceptPlay.addEventListener('click', () => {
+        conceptVideo.muted = false;
+        conceptVideo.volume = 1;
+        conceptVideo.play();
+        conceptPlay.remove();
+      });
+      conceptVideo.addEventListener('play', () => conceptPlay.remove());
+    }
 
     // Below-the-fold videos: only load/play while on screen.
     const lazyVideos = document.querySelectorAll('.lazy-video');
