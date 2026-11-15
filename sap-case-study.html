@@ -377,23 +377,21 @@
   .cc-contact a:hover { color: var(--ink); }
   .cc-dot { margin: 0 10px; opacity: 0.5; }
 
-  .sapphire-wrap { max-width: 1120px; margin: 0 auto; padding: 28px 48px 0; }
-  .sapphire-banner { position: relative; display: block; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 4px rgba(28,40,70,0.04), 0 30px 60px -40px rgba(28,40,90,0.3); }
-  .sapphire-banner img { display: block; width: 100%; height: auto; }
-  .sapphire-banner .ext-icon { position: absolute; top: 14px; right: 14px; width: 30px; height: 30px; border-radius: 999px; background: rgba(0,0,0,0.38); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; backdrop-filter: blur(4px); }
-  .sapphire-cap { margin-top: 14px; font-size: 15.5px; color: var(--ink-soft); text-align: center; line-height: 1.6; }
-  .sapphire-cap a { color: var(--sap); text-decoration: underline; text-underline-offset: 3px; }
-  .sapphire-cap a:hover { color: var(--sap-deep); }
-  .sapphire-cap a.secondary { color: var(--ink-soft); }
-  .sapphire-cap a.secondary:hover { color: var(--ink); }
-  .sapphire-wrap .label { margin-bottom: 22px; }
+  .sb3{display:flex;height:220px;background:#0a1e2c;text-decoration:none}
+  .sb3-text{flex:0 0 50%;display:flex;flex-direction:column;justify-content:center;gap:10px;padding:0 40px 0 max(48px, calc((100vw - 1120px)/2 + 48px))}
+  .sb3-big{font-size:28px;font-weight:700;line-height:1.15;letter-spacing:-0.01em;color:#fff;max-width:16ch}
+  .sb3-small{font-size:15px;line-height:1.5;color:rgba(255,255,255,.72)}
+  .sb3-link{font-size:13px;font-weight:600;color:#8cc4ff}
+  .sb3:hover .sb3-link{text-decoration:underline}
+  .sb3:focus-visible{outline:3px solid #8cc4ff;outline-offset:-3px}
+  .sb3 img{flex:1;min-width:0;height:100%;object-fit:cover;object-position:left center}
+  @media (max-width:860px){.sb3{flex-direction:column-reverse;height:auto}.sb3 img{width:100%;height:110px;flex:none}.sb3-text{padding:22px 24px 26px}.sb3-big{font-size:23px}}
   .fig-compact { max-width: 620px; margin: 0 auto; }
   .fig-compact .screen { box-shadow: 0 2px 3px rgba(28,40,70,0.03), 0 20px 44px -34px rgba(28,40,90,0.24); }
   .teaser { padding: 40px 0 8px; }
   .teaser .fig-lead { font-size: clamp(22px,3vw,32px); text-align: center; margin-top: 24px; }
 
   @media (max-width: 860px) {
-    .sapphire-wrap { padding: 24px 24px 0; }
     .wrap { padding: 0 24px; }
     .hero { padding: 60px 24px 52px; }
     section.block { padding: 56px 0; }
@@ -420,15 +418,14 @@
     </div>
   </nav>
 
-  <div class="sapphire-wrap">
-    <span class="label">Where this work landed</span>
-    <a class="sapphire-banner" href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer" aria-label="SAP Sapphire Orlando 2026 conference banner">
-      <img src="assets/sapphire-orlando-banner.webp" alt="SAP Sapphire Orlando 2026 conference banner" />
-      <span class="ext-icon">↗</span>
-    </a>
-    <p class="sapphire-cap">SAP Sapphire is SAP's flagship annual conference. At Sapphire Orlando 2026, SAP announced Joule Studio with Vercel embedded inside it — the direction this project explored.</p>
-    <p class="sapphire-cap"><a href="https://news.sap.com/2026/05/new-joule-studio-enterprise-scale-agentic-development/" target="_blank" rel="noopener noreferrer">Read SAP's announcement →</a> · <a class="secondary" href="https://www.youtube.com/watch?v=9aa-etRsaLU" target="_blank" rel="noopener noreferrer">Watch the keynote</a></p>
-  </div>
+  <a class="sb3" href="https://news.sap.com/2026/05/new-joule-studio-enterprise-scale-agentic-development/" target="_blank" rel="noopener noreferrer" aria-label="SAP Sapphire 2026 — read SAP's announcement">
+    <span class="sb3-text">
+      <span class="sb3-big">SAP's annual flagship conference · 2026</span>
+      <span class="sb3-small">Where SAP announced Vercel inside its platform.</span>
+      <span class="sb3-link">Read the announcement →</span>
+    </span>
+    <img src="assets/sapphire-orlando-banner.webp" alt="SAP Sapphire Orlando 2026 conference banner" />
+  </a>
 
   <!-- ===================== HERO ===================== -->
   <header class="hero wrap" data-screen-label="Hero">
