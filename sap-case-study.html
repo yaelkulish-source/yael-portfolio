@@ -96,25 +96,18 @@
     color: var(--ink-soft); margin-top: 28px; max-width: 40ch;
   }
   .meta {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 36px; margin-top: 60px;
+    margin-top: 60px;
     padding-top: 34px; border-top: 1px solid var(--line);
+  }
+  .meta-statement {
+    font-size: 22px; font-weight: 500; line-height: 1.5;
+    color: var(--ink); max-width: 40ch; text-wrap: pretty;
   }
   .meta-k {
     font-size: 10.5px; font-weight: 700; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px;
   }
-  .meta-v { font-size: 15px; font-weight: 500; line-height: 1.6; color: var(--ink); }
-  .meta-v .sub { display: block; color: var(--ink-soft); font-weight: 400; font-size: 13.5px; margin-top: 5px; }
-
-  /* by the numbers */
-  .stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 36px; margin-top: 34px;
-    padding-top: 30px; border-top: 1px solid var(--line);
-  }
-  .stat-n { font-family: var(--serif); font-weight: 700; font-size: clamp(34px, 4vw, 48px); line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
-  .stat-l { font-size: 13.5px; line-height: 1.45; color: var(--ink-soft); margin-top: 12px; max-width: 22ch; }
+  .meta-statement + .meta-k { margin: 16px 0 0; }
 
   /* ---------- SECTION SCAFFOLD ---------- */
   section.block { padding: 74px 0; }
@@ -393,7 +386,6 @@
     .wrap { padding: 0 24px; }
     .hero { padding: 60px 24px 52px; }
     section.block { padding: 56px 0; }
-    .meta { grid-template-columns: 1fr; gap: 26px; }
     .compare { grid-template-columns: 1fr; gap: 32px; }
     .case-closing { padding: 64px 24px 44px; }
     .cc-nav { flex-direction: column; gap: 32px; }
@@ -445,33 +437,8 @@
     <p class="hero-sub">Two audiences. One experience. Built inside SAP.</p>
 
     <div class="meta">
-      <div>
-        <div class="meta-k">Role</div>
-        <div class="meta-v">UX Design Lead<span class="sub">Co-led research, owned interviews &amp; synthesis, proposed the core deployment flow</span></div>
-      </div>
-      <div>
-        <div class="meta-k">Team</div>
-        <div class="meta-v">Me + 1 research partner<span class="sub">Alongside a PM and engineering lead</span></div>
-      </div>
-      <div>
-        <div class="meta-k">Methods</div>
-        <div class="meta-v">Research &amp; concept design<span class="sub">Interviews · Competitive analysis · Concept · Workshop</span></div>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div>
-        <div class="stat-n">8+</div>
-        <div class="stat-l">Internal interviews conducted</div>
-      </div>
-      <div>
-        <div class="stat-n">2</div>
-        <div class="stat-l">Design concepts explored</div>
-      </div>
-      <div>
-        <div class="stat-n">1</div>
-        <div class="stat-l">Principle adopted across the platform</div>
-      </div>
+      <p class="meta-statement">I led the research and designed the core deploy flow, with a PM, a second UX designer and a developer working directly with Vercel's team.</p>
+      <div class="meta-k">UX Design Lead · Dec 2025 – May 2026</div>
     </div>
   </header>
 
@@ -485,13 +452,42 @@
         <li>Cut the cognitive load of switching between SAP's many "Build" tools.</li>
         <li>Complement SAP&nbsp;Build — without adding another surface.</li>
       </ol>
+    </div>
+  </section>
+
+  <!-- ===================== 02 · INTO THE FIELD ===================== -->
+  <section class="block" data-screen-label="02 Into the field">
+    <div class="wrap read">
+      <span class="label">02: User Research · Developer Interviews</span>
+      <h2 class="h2">We went to talk to developers. They were exhausted.</h2>
+      <p class="lead">We interviewed internal developers, engineering managers, and product managers. What we heard wasn't a feature request. It was frustration.</p>
       <details class="more">
         <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
         <div class="more-body">
           <p>SAP&nbsp;Build had grown into a family of tools: Build Apps, Build Process Automation, Build Work Zone. Each served a purpose. But together, they'd become hard to navigate, even for people inside SAP. Our job was to find a way through.</p>
-          <p>Mid-research, the scope expanded: the experience needed to serve business users, not just developers, and that's when the real challenge came into focus. Developers switch tools; business users abandon them.</p>
+          <p>The confusion wasn't just about naming. It was about cognitive load: developers spending mental energy navigating SAP's tool landscape instead of building. Every context switch had a cost.</p>
         </div>
       </details>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE · DJ Adams -->
+  <section class="block tint" data-screen-label="Quote DJ Adams">
+    <div class="wrap">
+      <div class="pqwrap read" style="max-width: 920px;">
+        <p class="pullquote lg">"I gave up a long time ago trying to figure out what everything was with the word Build in it."</p>
+        <p class="pq-cite">DJ Adams · Developer Advocate, SAP</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 03 · THE PIVOT ===================== -->
+  <section class="block" data-screen-label="03 The pivot">
+    <div class="wrap read">
+      <span class="label">03: The Pivot</span>
+      <h2 class="h2">Then the audience changed. Meet Sarah.</h2>
+      <p class="lead">Mid-project, SAP's leadership widened the scope: the experience had to serve business users, not just developers. Developers switch tools. Business users abandon them.</p>
+      <p class="lead">Our research had already flagged the risk. DJ warned that citizen developers, left unguided, generate technical debt. So the pivot became a design constraint: Sarah needed guardrails, which meant she had to stay inside SAP.</p>
     </div>
   </section>
 
@@ -509,43 +505,18 @@
         </div>
         <figcaption class="fig-cap">
           <div class="fig-cap-body">
-            <div class="fig-lead">"The whole SAP Build family, reduced to one open question: what's next?"</div>
-            <p>The starting surface for the ecosystem overview, where a developer or a business user begins, in plain language, without first having to learn which "Build" they need.</p>
+            <div class="fig-lead">The whole SAP Build family, reduced to one open question: what's next?</div>
+            <p>This is where Sarah starts. She doesn't need to know which "Build" she needs. She describes what she wants in plain language.</p>
           </div>
         </figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- ===================== 02 · INTO THE FIELD ===================== -->
-  <section class="block" data-screen-label="02 Into the field">
+  <!-- ===================== 04 · THE INSIGHT ===================== -->
+  <section class="block" data-screen-label="04 The insight">
     <div class="wrap read">
-      <span class="label">02: User Research · Developer Interviews</span>
-      <h2 class="h2">We went to talk to developers. They were exhausted.</h2>
-      <p class="lead">We interviewed internal developers, engineering managers, and product managers. What we heard wasn't a feature request. It was frustration.</p>
-      <details class="more">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>The confusion wasn't just about naming. It was about cognitive load: developers spending mental energy navigating SAP's tool landscape instead of building. Every context switch had a cost.</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- PULL QUOTE · DJ Adams -->
-  <section class="block tint" data-screen-label="Quote DJ Adams">
-    <div class="wrap">
-      <div class="pqwrap read" style="max-width: 920px;">
-        <p class="pullquote lg">"I gave up a long time ago trying to figure out what everything was with the word Build in it."</p>
-        <p class="pq-cite">DJ Adams · Developer Advocate, SAP</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== 03 · THE INSIGHT ===================== -->
-  <section class="block" data-screen-label="03 The insight">
-    <div class="wrap read">
-      <span class="label">03: Design Principle · White-Label Approach</span>
+      <span class="label">04: Design Principle · White-Label Approach</span>
       <h2 class="h2">The answer wasn't another tool. It was one seamless experience.</h2>
       <p class="lead">Instead of building a new surface, we embedded the experience inside what users already trusted. A white-label approach: powerful technology, invisible seams, one familiar environment.</p>
 
@@ -591,11 +562,11 @@
     </div>
   </section>
 
-  <!-- ===================== 04 · THE CHOICE ===================== -->
-  <section class="block" data-screen-label="04 The choice">
+  <!-- ===================== 05 · THE CHOICE ===================== -->
+  <section class="block" data-screen-label="05 The choice">
     <div class="wrap">
       <div class="read">
-        <span class="label">04: Two Concepts · Design Decision</span>
+        <span class="label">05: Two Concepts · Design Decision</span>
         <h2 class="h2">Two concepts. One kept users where they belonged.</h2>
         <p class="lead">We explored two directions. Both worked technically. Only one felt right for the user.</p>
       </div>
@@ -642,10 +613,10 @@
     </div>
   </section>
 
-  <!-- ===================== 05 · THE DECISION ===================== -->
-  <section class="block" data-screen-label="05 The decision">
+  <!-- ===================== 06 · THE DECISION ===================== -->
+  <section class="block" data-screen-label="06 The decision">
     <div class="wrap read">
-      <span class="label">05: Business Impact · Deploy to BTP</span>
+      <span class="label">06: Business Impact · Deploy to BTP</span>
       <h2 class="h2">One button, in the right place, made the business goal reachable.</h2>
       <p class="lead">Through synthesis of our interviews, I proposed <strong>Deploy to BTP</strong>: a single action that takes a business user from "I built something" to "it's live," without ever needing to understand the infrastructure behind it. It became the project's most critical business decision.</p>
       <details class="more">
@@ -679,10 +650,10 @@
     </div>
   </section>
 
-  <!-- ===================== 06 · THE RESULT ===================== -->
-  <section class="block" data-screen-label="06 The result">
+  <!-- ===================== 07 · THE RESULT ===================== -->
+  <section class="block" data-screen-label="07 The result">
     <div class="wrap read">
-      <span class="label">06: Impact · Reflection</span>
+      <span class="label">07: Impact · Reflection</span>
       <h2 class="h2">The work found its way forward.</h2>
       <p class="lead">The solution was presented at an internal workshop in Germany, and received with enthusiasm. Working closely with a PM and engineering lead, we proposed a direction: embedded, seamless, deployment-first, in collaboration with Vercel. Shortly after, SAP launched a platform moving in exactly this direction at Sapphire.</p>
       <ul class="impact">
