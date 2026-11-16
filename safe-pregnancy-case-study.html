@@ -81,8 +81,6 @@
     text-transform: uppercase; color: var(--acc);
     display: inline-flex; align-items: center; gap: 11px;
   }
-  .label::before { content: ""; width: 24px; height: 1px; background: color-mix(in srgb, var(--acc) 50%, transparent); }
-  .label.bare::before { display: none; }
 
   /* ---------- HERO ---------- */
   .hero { padding: 92px 48px 64px; }
@@ -324,7 +322,6 @@
   /* ---------- DARK SECTION ---------- */
   section.night { background: var(--night); color: #FFFFFF; }
   .night .label { color: #E8C5BC; }
-  .night .label::before { background: rgba(232,197,188,0.5); }
   .night h2.h2 { color: #FFFFFF; }
   .night .lead { color: rgba(255,255,255,0.72); }
   .night .walk-text h3 { color: #FFFFFF; }
