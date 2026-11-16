@@ -238,7 +238,7 @@
   .persona .meta-k { margin-bottom: 12px; }
   .persona-name { font-size: 22px; font-weight: 600; line-height: 1.2; color: var(--ink); }
   .persona-role { font-size: 15px; color: var(--ink-soft); margin-top: 4px; }
-  .persona-quote { font-size: 15px; font-style: italic; color: var(--ink-soft); margin-top: 14px; }
+  .persona-quote { font-size: 15px; color: var(--ink-soft); margin-top: 14px; }
 
   /* ---------- FIGURES ---------- */
   section.figblock { padding: 28px 0; }
@@ -483,10 +483,32 @@
 
     <div class="meta">
       <p class="meta-statement">I led the research and designed the core deploy flow, with a PM, a second UX designer and a developer working directly with Vercel's team.</p>
-      <div class="meta-k">UX Design Lead · Dec 2025 – May 2026</div>
+      <div class="meta-k">UX Design Lead · Dec 2025 – Apr 2026</div>
       <a class="demo-link" href="#conceptVideo"><svg width="11" height="12" viewBox="0 0 22 24" fill="none" aria-hidden="true"><path d="M2 2.2 20 12 2 21.8V2.2Z" fill="currentColor"/></svg>Watch the demo (1:26)</a>
     </div>
   </header>
+
+  <!-- VISUAL · Build entry point -->
+  <section class="figblock" data-screen-label="Visual ecosystem">
+    <div class="wrap figwide">
+      <figure class="fig">
+        <div class="fig-title">The entry point</div>
+        <div class="screen">
+          <div class="screen-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com</span>
+          </div>
+          <img class="shot crop" src="uploads/step1-prompt_small.png" alt="SAP Build: the entry point, where the experience begins with a sentence" style="object-position: center;" />
+        </div>
+        <figcaption class="fig-cap">
+          <div class="fig-cap-body">
+            <div class="fig-lead">The whole SAP Build family, reduced to one open question: what's next?</div>
+            <p>No need to know which "Build" you need. You describe what you want in plain language, and SAP takes it from there.</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
 
   <!-- ===================== 01 · THE MISSION ===================== -->
   <section class="block" data-screen-label="01 The mission">
@@ -506,14 +528,7 @@
     <div class="wrap read">
       <span class="label">02: User Research · Developer Interviews</span>
       <h2 class="h2">We went to talk to developers. They were exhausted.</h2>
-      <p class="lead">We interviewed internal developers, engineering managers, and product managers. What we heard wasn't a feature request. It was frustration.</p>
-      <details class="more">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>SAP&nbsp;Build had grown into a family of tools: Build Apps, Build Process Automation, Build Work Zone. Each served a purpose. But together, they'd become hard to navigate, even for people inside SAP. Our job was to find a way through.</p>
-          <p>The confusion wasn't just about naming. It was about cognitive load: developers spending mental energy navigating SAP's tool landscape instead of building. Every context switch had a cost.</p>
-        </div>
-      </details>
+      <p class="lead">We interviewed developers, engineering managers and PMs. SAP&nbsp;Build had grown into a family of tools, and what we heard wasn't a feature request. It was frustration.</p>
     </div>
   </section>
 
@@ -562,32 +577,10 @@
         <div class="meta-k">Our new user</div>
         <div class="persona-name">Sarah</div>
         <div class="persona-role">Financial Operations Manager</div>
-        <p class="persona-quote">I have an idea, not a dev team.</p>
+        <p class="persona-quote">Wants to turn a business idea into a working app, without writing code.</p>
       </div>
       <p class="statement">Developers switch tools. <span class="em">Business users abandon them.</span></p>
       <p class="lead" style="margin-top: 30px;">Our research had already flagged the risk. DJ warned that citizen developers, left unguided, generate technical debt. So the pivot became a design constraint: Sarah needed guardrails, which meant she had to stay inside SAP.</p>
-    </div>
-  </section>
-
-  <!-- VISUAL · Build entry point -->
-  <section class="figblock" data-screen-label="Visual ecosystem">
-    <div class="wrap figwide">
-      <figure class="fig">
-        <div class="fig-title">The entry point</div>
-        <div class="screen">
-          <div class="screen-bar">
-            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com</span>
-          </div>
-          <img class="shot crop" src="uploads/step1-prompt_small.png" alt="SAP Build: the entry point, where the experience begins with a sentence" style="object-position: center;" />
-        </div>
-        <figcaption class="fig-cap">
-          <div class="fig-cap-body">
-            <div class="fig-lead">The whole SAP Build family, reduced to one open question: what's next?</div>
-            <p>This is where Sarah starts. She doesn't need to know which "Build" she needs. She describes what she wants in plain language.</p>
-          </div>
-        </figcaption>
-      </figure>
     </div>
   </section>
 
@@ -730,8 +723,8 @@
         <li><span class="ic">→</span><span><strong>Embedded, white-label</strong> became the principle behind our whole concept.</span></li>
       </ul>
       <div class="next-step">
-        <div class="meta-k">What I'd do next</div>
-        <p class="lead">Test the flow with real business users like Sarah, and measure how long it takes them to get from idea to a live app.</p>
+        <div class="meta-k">What I took away</div>
+        <p class="lead">In enterprise UX, the best design can be invisible. Our biggest contribution is something users will never notice: they simply get one continuous, seamless experience, from idea to live app.</p>
       </div>
     </div>
   </section>
