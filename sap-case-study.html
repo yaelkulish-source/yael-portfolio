@@ -108,6 +108,12 @@
     text-transform: uppercase; color: var(--ink-faint); margin-bottom: 12px;
   }
   .meta-statement + .meta-k { margin: 16px 0 0; }
+  .demo-link {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 16px;
+    font-size: 14px; font-weight: 600; color: var(--sap); text-decoration: none;
+  }
+  .demo-link:hover { text-decoration: underline; }
+  #conceptVideo { scroll-margin-top: 96px; }
 
   /* ---------- SECTION SCAFFOLD ---------- */
   section.block { padding: 74px 0; }
@@ -206,6 +212,16 @@
     max-width: 18ch; text-wrap: balance; margin-top: 30px;
   }
   .statement .em { color: var(--sap); font-style: italic; }
+
+  /* persona card (S03) */
+  .persona {
+    background: var(--tint); border: 1px solid var(--line); border-radius: 14px;
+    padding: 24px; max-width: 460px; margin-top: 28px;
+  }
+  .persona .meta-k { margin-bottom: 12px; }
+  .persona-name { font-size: 22px; font-weight: 600; line-height: 1.2; color: var(--ink); }
+  .persona-role { font-size: 15px; color: var(--ink-soft); margin-top: 4px; }
+  .persona-quote { font-size: 15px; font-style: italic; color: var(--ink-soft); margin-top: 14px; }
 
   /* ---------- FIGURES ---------- */
   section.figblock { padding: 28px 0; }
@@ -327,6 +343,18 @@
     box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sap) 18%, var(--line));
   }
 
+  /* decision table (S05) */
+  .decide { width: 100%; border-collapse: collapse; margin-top: 34px; font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
+  .decide th { text-align: left; font-size: 13px; font-weight: 700; color: var(--ink); padding: 0 16px 12px 0; border-bottom: 1px solid var(--line-2); }
+  .decide td { padding: 14px 16px 14px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .decide td:first-child { color: var(--ink); font-weight: 500; }
+  .decide .y { color: var(--sap); font-weight: 700; }
+  .decide .n { color: var(--ink-faint); font-weight: 700; }
+
+  /* next step (S07) */
+  .next-step { margin-top: 32px; }
+  .next-step .lead { margin-top: 0; }
+
   /* ---------- RESULT IMPACT ---------- */
   .impact { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 14px; max-width: 64ch; }
   .impact li {
@@ -439,6 +467,7 @@
     <div class="meta">
       <p class="meta-statement">I led the research and designed the core deploy flow, with a PM, a second UX designer and a developer working directly with Vercel's team.</p>
       <div class="meta-k">UX Design Lead · Dec 2025 – May 2026</div>
+      <a class="demo-link" href="#conceptVideo"><svg width="11" height="12" viewBox="0 0 22 24" fill="none" aria-hidden="true"><path d="M2 2.2 20 12 2 21.8V2.2Z" fill="currentColor"/></svg>Watch the 87-second demo</a>
     </div>
   </header>
 
@@ -486,8 +515,15 @@
     <div class="wrap read">
       <span class="label">03: The Pivot</span>
       <h2 class="h2">Then the audience changed. Meet Sarah.</h2>
-      <p class="lead">Mid-project, SAP's leadership widened the scope: the experience had to serve business users, not just developers. Developers switch tools. Business users abandon them.</p>
-      <p class="lead">Our research had already flagged the risk. DJ warned that citizen developers, left unguided, generate technical debt. So the pivot became a design constraint: Sarah needed guardrails, which meant she had to stay inside SAP.</p>
+      <p class="lead">Mid-project, SAP's leadership widened the scope: the experience had to serve business users, not just developers.</p>
+      <div class="persona">
+        <div class="meta-k">Our new user</div>
+        <div class="persona-name">Sarah</div>
+        <div class="persona-role">Financial Operations Manager</div>
+        <p class="persona-quote">I have an idea, not a dev team.</p>
+      </div>
+      <p class="statement">Developers switch tools. <span class="em">Business users abandon them.</span></p>
+      <p class="lead" style="margin-top: 30px;">Our research had already flagged the risk. DJ warned that citizen developers, left unguided, generate technical debt. So the pivot became a design constraint: Sarah needed guardrails, which meant she had to stay inside SAP.</p>
     </div>
   </section>
 
@@ -516,49 +552,9 @@
   <!-- ===================== 04 · THE INSIGHT ===================== -->
   <section class="block" data-screen-label="04 The insight">
     <div class="wrap read">
-      <span class="label">04: Design Principle · White-Label Approach</span>
-      <h2 class="h2">The answer wasn't another tool. It was one seamless experience.</h2>
-      <p class="lead">Instead of building a new surface, we embedded the experience inside what users already trusted. A white-label approach: powerful technology, invisible seams, one familiar environment.</p>
-
-      <figure class="video">
-        <div class="video-embed">
-          <video id="conceptVideo" src="uploads/sap-concept-v2.mp4" poster="uploads/sap-concept-poster.jpg" preload="metadata" playsinline controls></video>
-          <button class="video-play" id="conceptPlay" type="button" aria-label="Play video with sound">
-            <svg width="22" height="24" viewBox="0 0 22 24" fill="none" aria-hidden="true"><path d="M2 2.2 20 12 2 21.8V2.2Z" fill="currentColor"/></svg>
-          </button>
-        </div>
-        <figcaption class="video-cap">Sarah has an idea, not a dev team. Watch what happens next.</figcaption>
-      </figure>
-
-      <details class="more">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>White labeling meant that whether a developer was in VS&nbsp;Code or a business user was in SAP&nbsp;Build, they were experiencing the same underlying capability, without knowing it. The tool faded away. The work stayed.</p>
-        </div>
-      </details>
-    </div>
-  </section>
-
-  <!-- VISUAL · Embedded experience -->
-  <section class="figblock" data-screen-label="Visual embedded">
-    <div class="wrap figwide">
-      <figure class="fig">
-        <div class="fig-title">Embedded experience</div>
-        <div class="screen">
-          <div class="screen-bar">
-            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com / studio</span>
-          </div>
-          <img class="shot crop" src="uploads/Agent -_ Joule Chat.png" alt="The build experience embedded inside SAP — generation and preview side by side" style="object-position: center;" />
-        </div>
-        <figcaption class="fig-cap">
-          <div class="fig-cap-body">
-            <div class="fig-lead">"Same capability, two audiences, and no one has to leave home to use it."</div>
-            <p>The studio sits inside the environment users already trust. A plain-language request becomes a working app on the right, with no new surface to learn and no seams showing.</p>
-            <p class="fig-note">AI-generated prototype, shown for illustrative purposes.</p>
-          </div>
-        </figcaption>
-      </figure>
+      <span class="label">04: The Insight · White-Label Approach</span>
+      <h2 class="h2">The tools kept changing. The destination never did.</h2>
+      <p class="lead">We mapped the hand-offs between VS&nbsp;Code, Cursor, Windsurf, SAP&nbsp;Build and BTP. Every path ended in the same place: deploying to BTP. So instead of designing for each tool, we designed the destination, and kept the experience inside SAP. A white-label approach: Vercel's power, SAP's home.</p>
     </div>
   </section>
 
@@ -567,8 +563,8 @@
     <div class="wrap">
       <div class="read">
         <span class="label">05: Two Concepts · Design Decision</span>
-        <h2 class="h2">Two concepts. One kept users where they belonged.</h2>
-        <p class="lead">We explored two directions. Both worked technically. Only one felt right for the user.</p>
+        <h2 class="h2">Two concepts. Only one kept Sarah inside SAP.</h2>
+        <p class="lead">Both worked technically. We judged them on what mattered for Sarah.</p>
       </div>
 
       <div class="compare">
@@ -603,28 +599,59 @@
         </div>
       </div>
 
-      <details class="more" style="margin-top: 34px;">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>Concept A started in Vercel: powerful, familiar to developers, but required business users to leave their environment. Concept B kept everything inside SAP. The technology was the same. The experience was completely different.</p>
-          <p>We chose B because the moment a business user has to leave SAP, we've already lost them.</p>
+      <table class="decide">
+        <thead>
+          <tr><th scope="col"></th><th scope="col">A · Vercel-first</th><th scope="col">B · SAP-first</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>User stays inside SAP</td><td class="n">✕</td><td class="y">✓</td></tr>
+          <tr><td>Deploys to BTP</td><td class="n">✕</td><td class="y">✓</td></tr>
+          <tr><td>Familiar to developers</td><td class="y">✓</td><td><span class="y">✓</span> same tech underneath</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- VISUAL · Embedded experience -->
+  <section class="figblock" data-screen-label="Visual embedded">
+    <div class="wrap figwide">
+      <figure class="fig">
+        <div class="fig-title">Embedded experience</div>
+        <div class="screen">
+          <div class="screen-bar">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="addr"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3" stroke="currentColor" stroke-width="2"/></svg> build.sap.com / studio</span>
+          </div>
+          <img class="shot crop" src="uploads/Agent -_ Joule Chat.png" alt="The build experience embedded inside SAP — generation and preview side by side" style="object-position: center;" />
         </div>
-      </details>
+        <figcaption class="fig-cap">
+          <div class="fig-cap-body">
+            <div class="fig-lead">Same capability, two audiences, and no one has to leave home to use it.</div>
+            <p>The studio sits inside the environment users already trust. A plain-language request becomes a working app on the right, with no new surface to learn and no seams showing.</p>
+            <p class="fig-note">AI-generated prototype, shown for illustrative purposes.</p>
+          </div>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
   <!-- ===================== 06 · THE DECISION ===================== -->
   <section class="block" data-screen-label="06 The decision">
     <div class="wrap read">
-      <span class="label">06: Business Impact · Deploy to BTP</span>
-      <h2 class="h2">One button, in the right place, made the business goal reachable.</h2>
+      <span class="label">06: The Decision · Deploy to BTP</span>
+      <h2 class="h2">One button: Deploy to BTP.</h2>
       <p class="lead">Through synthesis of our interviews, I proposed <strong>Deploy to BTP</strong>: a single action that takes a business user from "I built something" to "it's live," without ever needing to understand the infrastructure behind it. It became the project's most critical business decision.</p>
-      <details class="more">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>SAP's business model depends on deployments to BTP. Every app that lives outside the ecosystem is revenue that doesn't happen. By keeping the experience inside SAP and making deployment a single, trusted action, we turned a UX decision into a business outcome.</p>
+      <p class="lead">SAP's business model depends on deployments to BTP. Every app that lives outside the ecosystem is revenue that doesn't happen. Making deployment a single, trusted action turned a UX decision into a business outcome.</p>
+
+      <figure class="video">
+        <div class="video-embed">
+          <video id="conceptVideo" src="uploads/sap-concept-v2.mp4" poster="uploads/sap-concept-poster.jpg" preload="metadata" playsinline controls></video>
+          <button class="video-play" id="conceptPlay" type="button" aria-label="Play video with sound">
+            <svg width="22" height="24" viewBox="0 0 22 24" fill="none" aria-hidden="true"><path d="M2 2.2 20 12 2 21.8V2.2Z" fill="currentColor"/></svg>
+          </button>
         </div>
-      </details>
+        <figcaption class="video-cap">Sarah has an idea, not a dev team. Watch what happens next.</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -642,7 +669,7 @@
         </div>
         <figcaption class="fig-cap">
           <div class="fig-cap-body">
-            <div class="fig-lead">"One button. The whole platform's promise compressed into it."</div>
+            <div class="fig-lead">One button. The whole platform's promise compressed into it.</div>
             <p>From "I built something" to "it's live," without the user ever needing to know what BTP is, or that infrastructure exists at all. Even the choice to show or hide SAP branding lives right here, baking the white-label principle into the decision itself.</p>
           </div>
         </figcaption>
@@ -653,19 +680,17 @@
   <!-- ===================== 07 · THE RESULT ===================== -->
   <section class="block" data-screen-label="07 The result">
     <div class="wrap read">
-      <span class="label">07: Impact · Reflection</span>
-      <h2 class="h2">The work found its way forward.</h2>
-      <p class="lead">The solution was presented at an internal workshop in Germany, and received with enthusiasm. Working closely with a PM and engineering lead, we proposed a direction: embedded, seamless, deployment-first, in collaboration with Vercel. Shortly after, SAP launched a platform moving in exactly this direction at Sapphire.</p>
+      <span class="label">07: Outcome · Reflection</span>
+      <h2 class="h2">SAP took the same direction on its biggest stage.</h2>
+      <p class="lead">We presented the concept at an internal workshop in Germany in March 2026. In May, at Sapphire, SAP announced Joule Studio with Vercel embedded inside it, the direction this project explored.</p>
       <ul class="impact">
         <li><span class="ic">→</span><span><strong>Deploy to BTP</strong> moved from a research proposal to one of the project's defining decisions.</span></li>
-        <li><span class="ic">→</span><span>The pivot from standalone to <strong>white-label, embedded</strong> became a principle that shaped the platform well beyond our scope.</span></li>
+        <li><span class="ic">→</span><span><strong>Embedded, white-label</strong> became the principle behind our whole concept.</span></li>
       </ul>
-      <details class="more">
-        <summary><span class="more-txt">Read</span><span class="chev"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.5L7 9L10.5 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span></summary>
-        <div class="more-body">
-          <p>What I'm proudest of isn't a screen. It's that a UX decision and a business goal turned out to be the same thing, and that the work we did in research shaped something that made it to one of SAP's biggest stages.</p>
-        </div>
-      </details>
+      <div class="next-step">
+        <div class="meta-k">What I'd do next</div>
+        <p class="lead">Test the flow with real business users like Sarah, and measure how long it takes them to get from idea to a live app.</p>
+      </div>
     </div>
   </section>
 
@@ -684,7 +709,7 @@
         </div>
         <figcaption class="fig-cap">
           <div class="fig-cap-body">
-            <div class="fig-lead">"A sentence became a live agent, running, in production, inside SAP."</div>
+            <div class="fig-lead">A sentence became a working app, inside SAP.</div>
           </div>
         </figcaption>
       </figure>
@@ -728,20 +753,6 @@
       });
       conceptVideo.addEventListener('play', () => conceptPlay.remove());
     }
-
-    // Below-the-fold videos: only load/play while on screen.
-    const lazyVideos = document.querySelectorAll('.lazy-video');
-    const videoObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const video = entry.target;
-        if (entry.isIntersecting) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-      });
-    }, { rootMargin: '200px 0px' });
-    lazyVideos.forEach((video) => videoObserver.observe(video));
   </script>
 
 </body>
